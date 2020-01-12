@@ -4,12 +4,80 @@
     <title>Flose</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/a1b57a84c2.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+  <header>
+    <% if public_signed_in? %>
+    <nav class="navbar navbar-fixed-top" style="background-color: #6897A0;　width:100%">
+    <div class="navbar-header navbar-left">
+      <%= link_to image_tag("logo.JPG", class: "image", height: "60"), root_path(current_public.id) %>
+    </div>
+
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <%= link_to publics_shop_path, class: "btn btn-warning" do %>
+          <i class="fas fa-shopping-basket text-dark" style="font-size: 25px;">&nbsp;買いに行く</i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to publics_restaurant_path, class: "btn btn-warning" do %>
+          <i class="fas fa-utensils text-dark" style="font-size: 25px;">&nbsp;食べに行く</i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to publics_recipes_path, class: "btn btn-warning" do %>
+          &emsp;<i class="fas fa-sticky-note text-dark" style="font-size: 25px;">&nbsp;レシピ&emsp;</i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to publics_user_path(current_public.id), class: "btn btn-outline-light" do %>
+          <i class="fas fa-user text-dark" style="font-size: 25px;">マイページ</i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to destroy_public_session_path, class: "btn btn-outline-light", method: :delete do %>
+          <i class="fas fa-sign-out-alt text-dark"  style="font-size: 25px;">ログアウト</i>
+        <% end %>
+      </li>
+
+    <% elsif company_signed_in? %>
+    <nav class="navbar navbar-fixed-top" style="background-color: #6897A0;　width: 100%; height: 100px;">
+      <div class="navbar-header navbar-left">
+        <%= link_to image_tag("logo.JPG", class: "image", height: "80"), companies_user_path %>
+      </div>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <%= link_to destroy_company_session_path, class: "btn-warning btn", method: :delete do %>
+            <i class="fas fa-sign-out-alt text-dark" style="font-size: 25px;">ログアウト</i>
+          <% end %>
+        </li>
+
+    <% else %>
+
+    <% end %>
+    </ul>
+  </nav>
+  </header>
+
+<body class='<%= "#{controller.controller_name}" %>'>
+  <div class="wrapper">
+
+    <div class="container">
+      <%= yield %>
+    </div>
+
+    <% if signed_in? %>
+    <footer>
+      <%= link_to "お問い合わせ", info_new_path, class: "text-light" %>
+    </footer>
+    <% end %>
+
+  </div>
+</body>
+
+
 </html>
