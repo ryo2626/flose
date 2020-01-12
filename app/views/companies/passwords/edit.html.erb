@@ -1,7 +1,17 @@
-<h2>Change your password</h2>
+<div class="container-fluid">
+
+  <div class ="row">
+    <div class =" mx-auto">
+      <div class ="col-12">
+        <h2>パスワードの変更</h2>
+      </div>
+
+  <div class ="row">
+    <div class ="mx-auto">
+      <div class ="col-12">
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= render "devise/error_messages", resource: resource %>
   <%= f.hidden_field :reset_password_token %>
 
   <div class="field">
@@ -22,4 +32,12 @@
   </div>
 <% end %>
 
-<%= render "companies/shared/links" %>
+<%= render "devise/links" %>
+
+      </div>
+    </div>
+  </div>
+
+    </div>
+  </div>
+</div>

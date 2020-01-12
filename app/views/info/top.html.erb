@@ -1,0 +1,22 @@
+<div class="text-center">
+<h1 class="text-light">ようこそ<strong>FLose</strong>へ</h1>
+<h2 class="text-light">
+	このサイトは、<br>
+	<strong>
+	「買いに行く」<br>
+	「食べに行く」<br>
+	「余りやすい食材で料理」</strong><br>
+	の３つの方法で、食品ロス削減を目指していくサイトです。
+</h2>
+
+  <% if signed_in? %>
+  <% else %>
+<%= link_to new_public_session_path, class: "btn btn-warning" do %>
+  <i class="fas fa-user text-dark" style="font-size: 25px;">利用者様ログイン・新規登録</i>
+<% end %>
+
+<%= link_to new_company_session_path, class: "btn btn-info" do %>
+	<i class="fas fa-user-tie text-dark" style="font-size: 25px;">企業様ログイン・新規登録</i>
+<% end %>
+<% end %>
+</div>

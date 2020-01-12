@@ -15,3 +15,43 @@
  */
 
 @import "bootstrap";
+
+input[type="text"] {
+  width: 200px;
+  height: 40px;
+    }
+
+input[type="password"] {
+  width: 200px;
+  height: 40px;
+}
+
+input[type="email"] {
+  width: 200px;
+  height: 40px;
+    }
+
+.info {
+	background-image: url(top_bg_img.PNG);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.wrapper{
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 120px;
+    box-sizing: border-box;
+}
+
+footer{
+    width: 100%;
+    background-color: gray;
+    text-align: center;
+    padding: 30px 0;
+    position: absolute;
+    bottom: 0;
+}
+
