@@ -7,9 +7,9 @@ def after_sign_in_path_for(resource)
   when Public
     publics_user_path(resource.id)
   when Company
-    companies_user_path(resource.id)
+    new_companies_commodity_path_path
   when Admin
-    admins_public_path
+    admins_publics_path
   end
 end
 
@@ -19,8 +19,6 @@ def after_sign_up_path_for(resource)
     publics_user_path(resource.id)
   when Company
     companies_user_path(resource.id)
-  when Admin
-    admins_public_path
   end
 end
 	  protected

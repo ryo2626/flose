@@ -5,7 +5,7 @@ class Public < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
 	has_many :recipes
-	has_many :reserves
+	has_many :reserves, dependent: :destroy
 	has_many :infos
 
 

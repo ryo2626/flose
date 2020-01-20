@@ -8,7 +8,7 @@ class Recipe < ApplicationRecord
 	accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: true
 
 	has_many :cooks, dependent: :destroy
-	accepts_nested_attributes_for :cooks, reject_if: :all_blank, allow_destroy: true
+	accepts_nested_attributes_for :cooks, reject_if: lambda { |attributes| attributes['process_text'].blank? }, allow_destroy: true
 
 	validates :dish_name, presence: true
 

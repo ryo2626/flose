@@ -1,2 +1,42 @@
 <h1>店舗一覧</h1>
 
+<div>
+	<h3>空白検索で全ての商品・住所で曖昧検索</h3>
+  <%= search_form_for @search, url:publics_shop_path do |f| %>
+    <%= f.search_field :address_cont, :placeholder => "住所で曖昧検索" %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
+
+<div class="row">
+<% if @result.count > 0 %>
+	<% @result.each do |r| %>
+		<% if r.limit > Time.now and r.quantity > 0 %>
+			<div class="col-6 col-lg-3 text-top">
+				<div class="commodity">
+					<div class="row">
+						<%= attachment_image_tag r, :commodity_image, :fill, 1000, 1000, fallback: "no_image.png", class: "offset-1 col-10" %>
+					</div>
+					<h4>商品名:</h4><h3><%= r.commodity_name %></h3>
+					<h2>コメント: <%= r.comment %></h2>
+					<h4>定価: <%= r.regular_price %>円</h4>
+					<h2>販売価格: <%= r.sale_price %>円</h2>
+					<h2>残り数: <%= r.quantity %></h2>
+		    		<% @limit = (r.limit - Time.now).to_i / 60 %>
+        		<% @limit_h = @limit /60 %>
+        		<% @limit_m = @limit % 60 %>
+    			<h4>残り時間: <%= @limit_h %>時間<%= @limit_m %>分</h4>
+						<%= form_for @reserve, url: publics_reserves_path do |f| %>
+							<%= f.hidden_field :commodity_id, :value => r.id %>
+							<%= f.hidden_field :public_id, :value => current_public.id %>
+							<%= f.submit "予約する", class: "btn btn-danger" %>
+      			<% end %>
+      	</div>
+			</div>
+    <% else %>
+		<% end %>
+	<% end %>
+	<% else %>
+	<% end %>
+</div>
+
