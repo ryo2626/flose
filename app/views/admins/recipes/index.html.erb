@@ -1,0 +1,18 @@
+<h1>レシピ一覧</h1>
+
+<% @recipe.each do |r| %>
+  <table class="table">
+  	<thead class="thead">
+  		<tr class="table-secondary">
+  		<th><h3><%= r.dish_name %></h3>
+  		<th>
+  		<th><%= link_to "商品詳細・編集", edit_admins_recipe_path(r), class: "btn btn-light" %>
+  	</thead>
+  	<tbody class="tbody">
+  		<tr class="table-light">
+			<td>画像: 画像
+			<td>コメント: <%= r.comment %>
+			<td>
+		</tbody>
+	</table>
+<% end %>

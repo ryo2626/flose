@@ -12,10 +12,20 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require jquery
 //= require cocoon
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(function() {
+
+  $('#back a').on('click',function(){
+    $('body, html').animate({
+      scrollTop:0
+    }, 800);
+      return false;
+  });
+
+});

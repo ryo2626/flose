@@ -1,0 +1,8 @@
+<h1>お問い合わせ詳細・編集</h1>
+
+<h3>投稿者種別: <%= @info.user_status %></h3>
+<h3>投稿者種名: <%= @info.contributor %></h3>
+<h3>メールアドレス: <%= @info.contributor_email %></h3>
+<h3>投稿内容: <%= @info.info_content %></h3>
+<h3>回答: <%= @info.info_status %></h3>
+<%= link_to "回答済みにする", admins_info_path, method: :PATCH, class: "btn btn-danger" %>

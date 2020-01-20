@@ -1,10 +1,8 @@
 <div class="nested-fields">
-<h4>工程順</h4>
-<%= f.number_field :process_count %>
 
 <h4>工程内容</h4>
 <%= f.text_field :process_text %>
-
+<%= f.hidden_field :process_count, value: 0 %>
   <%= link_to_remove_association "工程を削除", f %>
 
 </div>

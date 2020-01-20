@@ -9,73 +9,106 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <header>
-    <% if public_signed_in? %>
-    <nav class="navbar navbar-fixed-top" style="background-color: #6897A0;　width:100%">
-    <div class="navbar-header navbar-left">
-      <%= link_to image_tag("logo.JPG", class: "image", height: "60"), root_path(current_public.id) %>
-    </div>
-
-    <ul class="nav nav-pills">
-      <li class="nav-item">
-        <%= link_to publics_shop_path, class: "btn btn-warning" do %>
-          <i class="fas fa-shopping-basket text-dark" style="font-size: 25px;">&nbsp;買いに行く</i>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to publics_restaurant_path, class: "btn btn-warning" do %>
-          <i class="fas fa-utensils text-dark" style="font-size: 25px;">&nbsp;食べに行く</i>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to publics_recipes_path, class: "btn btn-warning" do %>
-          &emsp;<i class="fas fa-sticky-note text-dark" style="font-size: 25px;">&nbsp;レシピ&emsp;</i>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to publics_user_path(current_public.id), class: "btn btn-outline-light" do %>
-          <i class="fas fa-user text-dark" style="font-size: 25px;">マイページ</i>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to destroy_public_session_path, class: "btn btn-outline-light", method: :delete do %>
-          <i class="fas fa-sign-out-alt text-dark"  style="font-size: 25px;">ログアウト</i>
-        <% end %>
-      </li>
-
-    <% elsif company_signed_in? %>
-    <nav class="navbar navbar-fixed-top" style="background-color: #6897A0;　width: 100%; height: 100px;">
-      <div class="navbar-header navbar-left">
-        <%= link_to image_tag("logo.JPG", class: "image", height: "80"), companies_user_path %>
-      </div>
-
-      <ul class="nav nav-pills">
-        <li class="nav-item">
-          <%= link_to destroy_company_session_path, class: "btn-warning btn", method: :delete do %>
-            <i class="fas fa-sign-out-alt text-dark" style="font-size: 25px;">ログアウト</i>
-          <% end %>
-        </li>
-
-    <% else %>
-
-    <% end %>
-    </ul>
-  </nav>
-  </header>
-
 <body class='<%= "#{controller.controller_name}" %>'>
   <div class="wrapper">
 
+  <header>
+  <% if public_signed_in? %>
+    <nav class="navbar" style="background-color: #40575C;">
+      <%= link_to image_tag("logo.JPG", class: "image", height: "60"), root_path(current_public.id), class: "ml-2" %>
+      <h3 class="float-right mr-5">
+        <span class="text-light mr-1" style="font-size: 20px;">
+        ようこそ <%=current_public.lastname %>
+        </span>
+        <span class="text-light mr-4" style="font-size: 20px;">
+        <%=current_public.firstname %> 様
+        </span>
+        <span class="text-light ml-2 mr-2">/</span>
+        <%= link_to "マイページ", publics_user_path(current_public.id), class: "header_nav" %>
+        <span class="text-light ml-2 mr-2">/</span>
+        <%= link_to "ログアウト", destroy_public_session_path, method: :delete, class: " header_nav" %>
+        <span class="text-light ml-2">/</span>
+      </h3>
+    </nav>
+
+    <nav class="nav nav-pills nav-fill bg-warning">
+      <%= link_to publics_shop_path, class: "nav-item nav-link btn-warning border-secondary" do %>
+        <i class="fas fa-shopping-basket text-dark" style="font-size: 25px;">&nbsp;買いに行く</i>
+      <% end %>
+      <%= link_to publics_restaurant_path, class: "nav-item nav-link btn-warning border-secondary" do %>
+        <i class="fas fa-utensils text-dark" style="font-size: 25px;">&nbsp;食べに行く</i>
+      <% end %>
+      <%= link_to publics_recipes_path, class: "nav-item nav-link btn-warning" do %>
+        <i class="fas fa-file-alt text-dark" style="font-size: 25px;">&nbsp;レシピ</i>
+      <% end %>
+    </nav>
+
+
+  <% elsif company_signed_in? %>
+    <nav class="navbar" style="background-color: #40575C;">
+      <%= link_to image_tag("logo.JPG", class: "image", height: "60"), root_path, class: "ml-2" %>
+      <h3 class="float-right mr-5">
+        <span class="text-light mr-1">
+          ようこそ <%= current_company.company_name %> 様
+        </span>
+        <span class="text-light ml-2 mr-2">/</span>
+        <%= link_to "ログアウト", destroy_company_session_path, method: :delete, class: "header_nav" %>
+        <span class="text-light ml-2">/</span>
+      </h3>
+    </nav>
+
+    <nav class="nav nav-pills nav-fill bg-warning">
+      <%= link_to new_companies_commodity_path, class: "nav-item nav-link btn-warning" do %>
+        <i class="fas fa-shopping-basket text-dark" style="font-size: 25px;">  商品投稿</i>
+      <% end %>
+      <%= link_to companies_user_path(current_company), class: "nav-item nav-link btn-warning" do %>
+        <i class="fas fa-user-tie text-dark" style="font-size: 25px;">  会員情報</i>
+      <% end %>
+    </nav>
+
+
+  <% elsif admin_signed_in? %>
+    <nav class="navbar" style="background-color: #40575C;">
+      <%= link_to image_tag("logo.JPG", class: "image", height: "60"), admins_info_index_path, class: "ml-2" %>
+      <h3 class="float-right mr-5">
+        <span class="text-light">管理者ページ&nbsp;/&nbsp;</span>
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "header_nav" %>
+        <span class="text-light">&nbsp;/&nbsp;</span>
+      </h3>
+    </nav>
+
+    <nav class="nav nav-pills nav-fill bg-warning">
+      <%= link_to admins_info_index_path, class: "nav-item nav-link btn-warning" do %>お問い合わせ
+      <%if @nav_info.count > 0 %>
+        <span class="badge badge-pill badge-danger">
+      <% else %>
+        <span class="badge badge-pill badge-dark">
+      <% end %>
+        未読<%=@nav_info.count %>件</span>
+      <% end %>
+      <%= link_to "利用者一覧", admins_publics_path, class: "nav-item nav-link btn-warning" %>
+      <%= link_to "企業一覧", admins_companies_path, class: "nav-item nav-link btn-warning" %>
+      <%= link_to "商品一覧", admins_commodities_path, class: "nav-item nav-link btn-warning" %>
+      <%= link_to "レシピ一覧", admins_recipes_path, class: "nav-item nav-link btn-warning" %>
+    </nav>
+
+  <% else %>
+  <% end %>
+  </header>
+
+  <main>
     <div class="container">
       <%= yield %>
     </div>
-
-    <% if signed_in? %>
-    <footer>
-      <%= link_to "お問い合わせ", info_new_path, class: "text-light" %>
-    </footer>
-    <% end %>
-
+  </main>
+<% if signed_in? %>
+  <footer>
+    <%= link_to "お問い合わせ", new_info_path, class: "text-light" %>
+  </footer>
+<% else %>
+  <footer>
+  </footer>
+      <% end %>
   </div>
 </body>
 

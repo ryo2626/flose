@@ -1,0 +1,41 @@
+<h1>商品詳細・予約者</h1>
+
+<h3>残り: <%= @commodity.quantity %> 人</h3>
+
+<table class="table">
+	<thead class="thead">
+		<th>予約者
+		<th>電話番号
+	</thead>
+	<tbody class="tbody">
+<% @user.each do |u| %>
+<tr>
+	<td><h3><%= u.public.lastname_kana %>　<%= u.public.firstname_kana %> 様
+	<td><%= u.public.phone %>
+<% end %>
+</tbody>
+</table>
+
+
+<h3>画像:</h3><%= attachment_image_tag @commodity, :commodity_image, :fill, 1000, 1000, size: "100%", fallback: "no_image.png", class: "offset-2 col-8" %>
+<h3>商品名: <%= @commodity.commodity_name %></h3>
+<h3>コメント: <%= @commodity.comment %>円</h3>
+<h3>定価: <%= @commodity.regular_price %>円</h3>
+<h3>販売価格: <%= @commodity.sale_price %>円</h3>
+<h3>いつまで:
+  <% if @commodity.limit > Time.now %>
+        <% @limit = (@commodity.limit - Time.now).to_i / 60 %>
+        <% @limit_h = @limit /60 %>
+        <% @limit_m = @limit % 60 %>
+    <td>残り約<%= @limit_h %>時間<%= @limit_m %>分
+      <% else %>
+    <td>販売終了
+      <% end %>
+</h3>
+<h3>販売形態: <%= @commodity.commodity_category %></h3>
+
+<div id="back">
+  <a href="#">
+    <%= image_tag 'up.png', :size =>'60x60', class: "img" %>
+  </a>
+</div>

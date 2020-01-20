@@ -1,2 +1,19 @@
-<h1>Admins::Publics#index</h1>
-<p>Find me in app/views/admins/publics/index.html.erb</p>
+<h1>利用者一覧</h1>
+
+<% @user.each do |u| %>
+  <table class="table">
+  	<thead class="thead">
+  		<tr class="table-secondary">
+  		<th><h6><%= u.lastname_kana %>　<%= u.firstname_kana %></h6>
+  				<h5><%= u.lastname %>　<%= u.firstname %></h5>
+  		<th>ニックネーム:　<%= u.nickname %>
+  		<th><%= link_to "ユーザー詳細・編集", edit_admins_public_path(u), class: "btn btn-light" %>
+  	</thead>
+  	<tbody class="tbody">
+  		<tr class="table-light">
+  		<td>電話番号:　<%= u.phone %>
+			<td>Email:　<%= u.email %>
+			<td>レシピ投稿:　<%= u.recipes.count %>件
+		</tbody>
+	</table>
+<% end %>

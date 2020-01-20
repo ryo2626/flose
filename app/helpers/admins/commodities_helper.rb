@@ -1,2 +1,2 @@
-module Admins::CommoditiesHelpers
+module Admins::CommoditiesHelper
 end

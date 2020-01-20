@@ -1,1 +1,47 @@
 <h1>レシピ編集画面</h1>
+
+<% if @recipe.errors.any? %>
+  <% @recipe.errors.full_messages.each do |message| %>
+    <h3><%= message %></h3>
+  <% end %>
+<% end %>
+
+<%= form_for @recipe, url: publics_recipe_path, method: :patch do |form| %>
+	<%= form.hidden_field :public_id, :value => @user %>
+
+	<h3>料理名</h3><h5>※必須</h5>
+		<%= form.text_field :dish_name %>
+
+	<h3>画像選択</h3>
+		<%= form.attachment_field :recipe_image %></li>
+
+	<h3>コメント</h3><h5>※必須</h5>
+		<%= form.text_field :comment %>
+
+
+	<h3>材料</h3><h5>※必須</h5>
+	<%= form.fields_for :ingredients do |f| %>
+    <%= render "ingredients_fields", f: f %>
+  <% end %>
+
+<div class="links">
+<%= link_to_add_association "材料を追加", form, :ingredients, partial: "ingredients_fields" %>
+</div>
+
+
+	<h3>工程</h3><h5>※必須</h5>
+	<%= form.fields_for :cooks do |f| %>
+    <%= render "cooks_fields", f: f %>
+  <% end %>
+
+<div class="links">
+<%= link_to_add_association "工程を追加", form, :cooks, partial: "cooks_fields" %>
+</div>
+
+
+	<%= form.submit '編集完了' %>
+
+<% end %>
+
+
+
