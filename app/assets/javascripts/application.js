@@ -19,7 +19,7 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-$(function() {
+$(document).ready(function(){
 
   $('#back a').on('click',function(){
     $('body, html').animate({
@@ -27,5 +27,13 @@ $(function() {
     }, 800);
       return false;
   });
+
+bubbly({
+  colorStart: '#ffffff',
+  colorStop: '#FFAD90',
+  blur: 1,
+  compose: 'source-over',
+  bubbleFunc:() => `hsla(${Math.random() * 10000}, 100%, 50%, .2)`
+});
 
 });

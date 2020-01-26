@@ -8,56 +8,72 @@
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">編集フォーム</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+
+      <div class="modal-header bg-warning">
+        <h3 class="modal-title font-weight-bold" id="staticBackdropLabel">編集フォーム</h3>
+        <button type="button" class="btn-lg btn-secondary" data-dismiss="modal" aria-label="閉じる">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
+  <div class="row">
+    <div class="col-12 col-lg-10 offset-lg-1">
       <div class="modal-body">
+
         <%= form_for @user, url: publics_user_path, method: :patch do |f|%>
-    <div class="field">
-      <%= f.label :lastname %>
-      <%= f.text_field :lastname, autofocus: true, autocomplete: "姓", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :firstname %>
-      <%= f.text_field :firstname, autofocus: true, autocomplete: "名", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :lastname_kana %>
-      <%= f.text_field :lastname_kana, autofocus: true, autocomplete: "セイ", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :firstname_kana %>
-      <%= f.text_field :firstname_kana, autofocus: true, autocomplete: "メイ", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :nickname %>
-      <%= f.text_field :nickname, autofocus: true, autocomplete: "ニックネーム", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "メールアドレス", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :postalcode %>（ハイフンなし）
-      <%= f.text_field :postalcode, autofocus: true, autocomplete: "郵便番号", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :address %>
-      <%= f.text_field :address, autofocus: true, autocomplete: "住所", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :phone %>（半角で入力）
-      <%= f.text_field :phone, autofocus: true, autocomplete: "電話番号", class: 'form-control' %>
-    </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-        <%= f.submit "編集完了", class: "btn btn-primary" %>
+          <div class="row">
+            <div class="col">
+              <div class="field">
+                <%= f.label :lastname %>
+                <%= f.text_field :lastname, class: 'form-control-lg w-100 text-center' %>
+              </div>
+              <div class="field">
+                <%= f.label :lastname_kana %>
+                <%= f.text_field :lastname_kana, class: 'form-control-lg w-100 text-center' %>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="field">
+                <%= f.label :firstname %>
+                <%= f.text_field :firstname, class: 'form-control-lg w-100 text-center' %>
+              </div>
+              <div class="field">
+                <%= f.label :firstname_kana %>
+                <%= f.text_field :firstname_kana, class: 'form-control-lg w-100 text-center' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label :nickname %>
+            <%= f.text_field :nickname, class: 'form-control-lg w-100 text-center' %>
+          </div>
+          <div class="field">
+            <%= f.label :email %>
+            <%= f.email_field :email, class: 'form-control-lg w-100 text-center' %>
+          </div>
+          <div class="field">
+            <%= f.label :postalcode %>（ハイフンなし）
+            <%= f.text_field :postalcode, class: 'form-control-lg w-100 text-center' %>
+          </div>
+          <div class="field">
+            <%= f.label :address %>
+            <%= f.text_field :address, class: 'form-control-lg w-100 text-center' %>
+          </div>
+          <div class="field">
+            <%= f.label :phone %>（半角で入力）
+            <%= f.text_field :phone, class: 'form-control-lg w-100 text-center ' %>
+          </div>
+          <div class="text-center">
+            <%= link_to "退会", publics_user_path, method: :delete, class: "float-right mr-2" %>
+            <%= f.submit "編集完了", class: "btn btn-success btn-lg pr-5 pl-5" %>
+          </div>
         <% end %>
       </div>
+    </div>
+  </div>
+
     </div>
   </div>
 </div>
@@ -68,7 +84,7 @@
 <h1>予約履歴</h1>
 <h2>販売中</h2>
 	<table class="table">
-		<thead class="thead">
+		<thead class="thead thead-light">
 			<th>店名
 			<th>住所
 			<th>リンク
@@ -78,41 +94,52 @@
 		</thead>
     <tbody class="tbody">
 	<% @reserve.each do |r| %>
-		<% if r.commodity.limit > Time.now %>
     <tr>
-			<td><%= r.commodity.company.company_name %>
-			<td><%= r.commodity.company.address %>
-			<td><%= link_to '地図アプリで開く', "https://www.google.com/maps/search/?api=1&query=#{r.commodity.company.address
-		}".html_safe, class: 'button' %>
+      <% if r.commodity.company.deleted? %>
+        <td>退会した企業
+        <td>
+        <td>
+      <% else %>
+        <td><%= r.commodity.company.company_name %>
+        <td><%= r.commodity.company.address %>
+        <td><%= link_to '地図アプリで開く', "https://www.google.com/maps/search/?api=1&query=#{r.commodity.company.address
+    }".html_safe, class: 'button' %>
+      <% end %>
 			<td><%= r.commodity.commodity_name %>
 			<td><%= r.commodity.commodity_category %>
 			<td><%= r.commodity.limit.strftime("%m月%d日 %H:%M まで") %>
-    <% else %>
 	  <% end %>
-  <% end %>
 </tdody>
 </table>
 
 <h2>販売終了</h2>
   <table class="table">
-    <thead class="thead">
+    <thead class="thead thead-light">
       <th>店名
       <th>住所
       <th>商品名
       <th>販売形態
       <th>時間
     </thead>
-    <tbody class="tbody">
-  <% @reserve.each do |r| %>
-    <% if r.commodity.limit < Time.now %>
-    <tr>
-      <td><%= r.commodity.company.company_name %>
-      <td><%= r.commodity.company.address %>
+  <% @reserve_d.each do |r| %>
+  <tbody class="tbody">
+    <tr class="table-light">
+      <% if r.commodity.company.deleted? %>
+        <td>退会した企業
+        <td>
+      <% else %>
+        <td><%= r.commodity.company.company_name %>
+        <td><%= r.commodity.company.address %>
+      <% end %>
       <td><%= r.commodity.commodity_name %>
       <td><%= r.commodity.commodity_category %>
       <td><%= r.commodity.limit.strftime("%m月%d日 %H:%M まで") %>
-    <% else %>
+    </tdody>
     <% end %>
-  <% end %>
-</tdody>
+
 </table>
+<div class="row">
+  <div class="col text-center">
+    <%= paginate @reserve_d %>
+  </div>
+</div>

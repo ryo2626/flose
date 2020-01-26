@@ -12,6 +12,9 @@ class Companies::UsersController < ApplicationController
   end
 
   def destroy
+    @user = Company.find(params[:id])
+    @user.destroy
+    redirect_to root_path
   end
 
 private

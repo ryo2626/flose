@@ -7,4 +7,5 @@ class Company < ApplicationRecord
 	has_many :commodities
 	has_many :infos
 
+	acts_as_paranoid
 end

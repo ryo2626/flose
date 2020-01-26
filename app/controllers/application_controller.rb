@@ -7,9 +7,9 @@ def after_sign_in_path_for(resource)
   when Public
     publics_user_path(resource.id)
   when Company
-    new_companies_commodity_path_path
+    new_companies_commodity_path
   when Admin
-    admins_publics_path
+    admins_info_index_path
   end
 end
 

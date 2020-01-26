@@ -1,1 +1,108 @@
-<h1>企業詳細・編集</h1>
+<h1><span class="text-secondary">■</span>企業詳細・編集</h1>
+<% if @user.deleted? %>
+  <div class="alert-danger text-center">
+    <h3>凍結中アカウント</h3>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col text-center">
+<%= link_to "アカウント凍結・解除", admins_company_path, method: :delete, class: "btn btn-danger" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 col-lg-6 offset-lg-3">
+  <%= form_for @user, url: admins_company_path, method: :patch do |f|%>
+
+    <div class="field h3 mt-3">
+      <%= f.label :company_name %><br>
+      <%= f.text_field :company_name, class: 'form-control-lg text-center w-100' %>
+    </div>
+    <div class="field h3 mt-3">
+      <%= f.label :email %><br>
+      <%= f.email_field :email, class: 'form-control-lg text-center w-100' %>
+    </div>
+    <div class="field h3 mt-3">
+      <%= f.label :postalcode %>（ハイフンなし）<br>
+      <%= f.text_field :postalcode, class: 'form-control-lg text-center w-100' %>
+    </div>
+    <div class="field h3 mt-3">
+      <%= f.label :address %><br>
+      <%= f.text_field :address, class: 'form-control-lg text-center w-100' %>
+    </div>
+    <div class="field h3 mt-3">
+      <%= f.label :phone %>（半角で入力）<br>
+      <%= f.text_field :phone,  class: 'form-control-lg text-center w-100' %>
+    </div>
+    <div class="row">
+      <div class="col-12 text-center mt-3">
+        <%= f.submit "編集完了", class: "btn btn-primary btn-lg" %>
+      </div>
+    </div>
+  <% end %>
+  </div>
+</div>
+
+<h1><span class="text-secondary">■</span>販売中</h1>
+<table class="table">
+	<thead class="thead">
+    <tr class="table-secondary">
+		<th>商品名
+		<th>販売価格
+		<th>期限
+		<th>残り時間
+		<th>販売形態
+		<th>詳細
+	</thead>
+  <tbody class="tbody">
+<% @user.commodities.each do |c| %>
+
+    <% if c.limit > Time.now %>
+    <tr class="table-light">
+		<td><%= c.commodity_name %>
+		<td><%= c.sale_price %>円
+		<td><%= c.limit.strftime("%m月%d日 %H:%M まで") %>
+
+        <% @limit = (c.limit - Time.now).to_i / 60 %>
+        <% @limit_h = @limit /60 %>
+        <% @limit_m = @limit % 60 %>
+    <td>残り約<%= @limit_h %>時間<%= @limit_m %>分
+    <td><%= c.commodity_category %>
+    <td><%= link_to "詳細", edit_admins_commodity_path(c), class: "btn btn-success" %>
+    <% else %>
+    <% end %>
+<% end %>
+</tbody>
+</table>
+
+<h1><span class="text-secondary">■</span>販売終了</h1>
+<table class="table">
+  <thead class="thead bg-light">
+    <tr class="table-secondary">
+    <th>商品名
+    <th>販売価格
+    <th>期限
+    <th>残り時間
+    <th>販売形態
+    <th>詳細
+  </thead>
+  <tbody class="tbody">
+<% @user.commodities.each do |c| %>
+
+    <% if c.limit < Time.now %>
+  <tr class="table-light">
+    <td><%= c.commodity_name.truncate(12) %>
+    <td><%= c.sale_price %>円
+    <td><%= c.limit.strftime("%m月%d日 %H:%M まで") %>
+    <td>販売終了
+    <td><%= c.commodity_category %>
+    <td><%= link_to "詳細", edit_admins_commodity_path(c), class: "btn btn-success" %>
+    <% else %>
+
+    <% end %>
+
+<% end %>
+</tbody>
+</table>
+
