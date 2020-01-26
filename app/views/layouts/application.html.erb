@@ -5,11 +5,11 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <script src="https://kit.fontawesome.com/a1b57a84c2.js" crossorigin="anonymous"></script>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-<body class='<%= "#{controller.controller_name}" %>'>
+<body class='<%= "#{controller.controller_name}" %> font'>
   <div class="wrapper">
 
   <header>
@@ -101,7 +101,7 @@
       <%= yield %>
     </div>
   </main>
-<% if signed_in? %>
+<% if company_signed_in? or public_signed_in? %>
   <footer>
     <%= link_to "お問い合わせ", new_info_path, class: "text-light" %>
   </footer>

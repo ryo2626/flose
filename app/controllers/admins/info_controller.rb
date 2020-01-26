@@ -2,7 +2,8 @@ class Admins::InfoController < ApplicationController
 	before_action :nav_info, only: [:index, :edit]
 
 	def index
-		@infos = Info.all
+		@infos = Info.order(created_at: :desc)
+								 .page(params[:page]).per(20)
 	end
 
 	def edit
@@ -24,4 +25,5 @@ private
   def nav_info
     @nav_info = Info.where(info_status: 0)
   end
+
 end

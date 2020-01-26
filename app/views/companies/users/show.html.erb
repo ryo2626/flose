@@ -1,48 +1,53 @@
 <h1>企業詳細・投稿一覧</h1>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-  登録住所編集
+  登録情報編集
 </button>
 
 <!-- モーダルの設定 -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">編集フォーム</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+
+      <div class="modal-header bg-info">
+        <h3 class="modal-title font-weight-bold" id="staticBackdropLabel">編集フォーム</h5>
+        <button type="button" class="btn-lg btn-secondary" data-dismiss="modal" aria-label="閉じる">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
+  <div class="row">
+    <div class="col-12 col-lg-10 offset-lg-1">
       <div class="modal-body">
         <%= form_for @user, url: companies_user_path, method: :patch do |f|%>
-
-    <div class="field">
-      <%= f.label :company_name %>
-      <%= f.text_field :company_name, autofocus: true, autocomplete: "企業名", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "メールアドレス", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :postalcode %>（ハイフンなし）
-      <%= f.text_field :postalcode, autofocus: true, autocomplete: "郵便番号", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :address %>
-      <%= f.text_field :address, autofocus: true, autocomplete: "住所", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :phone %>（半角で入力）
-      <%= f.text_field :phone, autofocus: true, autocomplete: "電話番号", class: 'form-control' %>
-    </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-        <%= f.submit "編集完了", class: "btn btn-primary" %>
+          <div class="field">
+            <%= f.label :company_name %>
+            <%= f.text_field :company_name, class: 'form-control-lg w-100 text-center' %>
+          </div>
+          <div class="field">
+            <%= f.label :email %>
+            <%= f.email_field :email, class: 'form-control-lg w-100 text-center' %>
+          </div>
+          <div class="field">
+            <%= f.label :postalcode %>
+           <%= f.text_field :postalcode, class: 'form-control-lg w-100 text-center' %>
+          </div>
+          <div class="field">
+            <%= f.label :address %>
+            <%= f.text_field :address, class: 'form-control-lg w-100 text-center' %>
+          </div>
+          <div class="field">
+            <%= f.label :phone %>
+            <%= f.text_field :phone, class: 'form-control-lg w-100 text-center' %>
+          </div>
+          <div class="text-center pt-3">
+            <%= link_to "退会", companies_user_path, method: :delete, class: "float-right mr-2" %>
+            <%= f.submit "編集完了", class: "btn btn-info btn-lg pr-5 pl-5" %>
+          </div>
         <% end %>
       </div>
+    </div>
+  </div>
     </div>
   </div>
 </div>
@@ -58,24 +63,23 @@
 		<th>詳細
 	</thead>
   <tbody class="tbody">
-<% @commodity.each do |c| %>
+    <% @commodity.each do |c| %>
 
-    <% if c.limit > Time.now %>
-    <tr>
-		<td><%= c.commodity_name %>
-		<td><%= c.sale_price %>円
-		<td><%= c.limit.strftime("%m月%d日 %H:%M まで") %>
+      <% if c.limit > Time.now %>
+       <tr>
+		    <td><%= c.commodity_name %>
+		    <td><%= c.sale_price %>円
+		    <td><%= c.limit.strftime("%m月%d日 %H:%M まで") %>
 
-        <% @limit = (c.limit - Time.now).to_i / 60 %>
-        <% @limit_h = @limit /60 %>
-        <% @limit_m = @limit % 60 %>
-    <td>残り約<%= @limit_h %>時間<%= @limit_m %>分
-    <td><%= c.commodity_category %>
-    <td><%= link_to "詳細", companies_commodity_path(c), class: "btn btn-success" %>
-    <% else %>
+          <% @limit = (c.limit - Time.now).to_i / 60 %>
+          <% @limit_h = @limit /60 %>
+          <% @limit_m = @limit % 60 %>
+        <td>残り約<%= @limit_h %>時間<%= @limit_m %>分
+        <td><%= c.commodity_category %>
+        <td><%= link_to "詳細", companies_commodity_path(c), class: "btn btn-success" %>
+      <% end %>
     <% end %>
-<% end %>
-</tbody>
+  </tbody>
 </table>
 
 <h1>販売終了</h1>
@@ -89,21 +93,18 @@
     <th>詳細
   </thead>
   <tbody class="tbody">
-<% @commodity.each do |c| %>
+    <% @commodity.each do |c| %>
 
-    <% if c.limit < Time.now %>
-  <tr>
-    <td><%= c.commodity_name %>
-    <td><%= c.sale_price %>円
-    <td><%= c.limit.strftime("%m月%d日 %H:%M まで") %>
-    <td>販売終了
-    <td><%= c.commodity_category %>
-    <td><%= link_to "詳細", companies_commodity_path(c), class: "btn btn-success" %>
-    <% else %>
-
+      <% if c.limit < Time.now %>
+        <tr>
+          <td><%= c.commodity_name %>
+          <td><%= c.sale_price %>円
+          <td><%= c.limit.strftime("%m月%d日 %H:%M まで") %>
+          <td>販売終了
+          <td><%= c.commodity_category %>
+          <td><%= link_to "詳細", companies_commodity_path(c), class: "btn btn-success" %>
+      <% end %>
     <% end %>
-
-<% end %>
-</tbody>
+  </tbody>
 </table>
 

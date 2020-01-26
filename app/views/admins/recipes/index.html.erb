@@ -1,18 +1,36 @@
-<h1>レシピ一覧</h1>
 
-<% @recipe.each do |r| %>
+<div class="row">
+  <div class="col-6 offset-3 text-center">
+    <h3>空白検索で全てのレシピ</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6 offset-3 text-center">
+    <%= search_form_for @search, url:admins_recipes_path do |f| %>
+      <%= f.search_field :dish_name_cont, :placeholder => "料理名で曖昧検索", class: "form-control-lg" %>
+      <%= f.submit "検索", class: "btn-lg" %>
+    <% end %>
+  </div>
+</div>
+
+<h1>レシピ一覧</h1>
+<% @result.each do |r| %>
   <table class="table">
   	<thead class="thead">
   		<tr class="table-secondary">
-  		<th><h3><%= r.dish_name %></h3>
-  		<th>
+  		<th><%= r.dish_name %>
+  		<th>投稿日時:<%= r.created_at.strftime("%Y-%m-%d %H:%M") %>
   		<th><%= link_to "商品詳細・編集", edit_admins_recipe_path(r), class: "btn btn-light" %>
   	</thead>
   	<tbody class="tbody">
   		<tr class="table-light">
-			<td>画像: 画像
+			<td><%= attachment_image_tag r, :recipe_image, :fill, 1000, 1000, size: '100x80', fallback: "no_image.png" %>
 			<td>コメント: <%= r.comment %>
 			<td>
 		</tbody>
 	</table>
 <% end %>
+
+
+    <%= paginate @result %>

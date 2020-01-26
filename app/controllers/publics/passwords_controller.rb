@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Publics::PasswordsController < Devise::PasswordsController
+
+  before_action :company_user
+
   # GET /resource/password/new
   # def new
   #   super
@@ -31,4 +34,10 @@ class Publics::PasswordsController < Devise::PasswordsController
   # def after_sending_reset_password_instructions_path_for(resource_name)
   #   super(resource_name)
   # end
+
+  def company_user
+    if company_signed_in?
+      redirect_to new_companies_commodity_path
+    end
+  end
 end

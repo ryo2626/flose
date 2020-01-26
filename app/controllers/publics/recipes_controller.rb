@@ -23,7 +23,9 @@ class Publics::RecipesController < ApplicationController
   end
 
   def index
-    @recipes = Recipe.all
+    recipe = params[:q]
+    @search = Recipe.ransack(recipe)
+    @result = @search.result(distinct: true)
   end
 
   def show
@@ -41,7 +43,7 @@ class Publics::RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
     @cooks = params.dig(:recipe,:cooks_attributes)
-    # Recipe.cooks.process_countに連番を振る
+  # Recipe.cooks.process_countに連番を振る
     cook_count = 1
       @cooks.each do |p|
         p[1][:process_count] = cook_count

@@ -1,17 +1,19 @@
 Rails.application.routes.draw do
-
-  namespace :companies do
-    get 'commodity/new'
-    get 'commodity/create'
-    get 'commodity/show'
-  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'info#top'
 
-  devise_for :publics
+  devise_for :publics, :controllers => {
+    :passwords => 'publics/passwords',
+    :sessions => 'publics/sessions'
+  }
+  devise_for :companies, :controllers => {
+    :passwords => 'companies/passwords',
+    :sessions => 'companies/sessions'
+  }
+
   devise_for :admins
-  devise_for :companies
+
 
   resources :info, only: [:new, :create]
 
