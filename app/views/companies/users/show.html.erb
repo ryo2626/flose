@@ -1,5 +1,14 @@
-<h1>企業詳細・投稿一覧</h1>
+<div class="row row1">
+  <div class="col-12 text-center text-danger">
+    <% if @user.errors.any? %>
+      <% @user.errors.full_messages.each do |message| %>
+        <h3>・<%= message %></h3>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 
+<h1>企業詳細・投稿一覧</h1>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
   登録情報編集
 </button>
@@ -54,7 +63,7 @@
 
 <h1>販売中</h1>
 <table class="table">
-	<thead class="thead">
+	<thead class="thead thead-light">
 		<th>商品名
 		<th>販売価格
 		<th>期限
@@ -62,7 +71,7 @@
 		<th>販売形態
 		<th>詳細
 	</thead>
-  <tbody class="tbody">
+  <tbody class="tbody table-light">
     <% @commodity.each do |c| %>
 
       <% if c.limit > Time.now %>
@@ -84,7 +93,7 @@
 
 <h1>販売終了</h1>
 <table class="table">
-  <thead class="thead">
+  <thead class="thead thead-light">
     <th>商品名
     <th>販売価格
     <th>期限
@@ -92,9 +101,8 @@
     <th>販売形態
     <th>詳細
   </thead>
-  <tbody class="tbody">
-    <% @commodity.each do |c| %>
-
+  <% @commodity.each do |c| %>
+    <tbody class="tbody table-light">
       <% if c.limit < Time.now %>
         <tr>
           <td><%= c.commodity_name %>
@@ -104,7 +112,7 @@
           <td><%= c.commodity_category %>
           <td><%= link_to "詳細", companies_commodity_path(c), class: "btn btn-success" %>
       <% end %>
-    <% end %>
-  </tbody>
+    </tbody>
+  <% end %>
 </table>
 

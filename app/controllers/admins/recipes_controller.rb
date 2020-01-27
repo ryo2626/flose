@@ -1,7 +1,8 @@
 class Admins::RecipesController < ApplicationController
-	before_action :nav_info, only: [:index, :edit]
+  before_action :authenticate_admin!
 
 	def index
+    @nav_info = Info.where(info_status: 0)
     recipe = params[:q]
     @search = Recipe.ransack(recipe)
     @result = @search.result(distinct: true)
@@ -9,6 +10,7 @@ class Admins::RecipesController < ApplicationController
 	end
 
   def edit
+    @nav_info = Info.where(info_status: 0)
     @recipe = Recipe.find(params[:id])
     @user = @recipe.public_id
     @recipe.ingredients.build
@@ -16,7 +18,7 @@ class Admins::RecipesController < ApplicationController
   end
 
   def update
-    recipe = Recipe.find(params[:id])
+    @recipe = Recipe.find(params[:id])
     cooks = params.dig(:recipe,:cooks_attributes)
   # Recipe.cooks.process_countに連番を振る
     cook_count = 1
@@ -24,13 +26,24 @@ class Admins::RecipesController < ApplicationController
         p[1][:process_count] = cook_count
         cook_count += 1
       end
-    recipe.update(recipe_params)
-    redirect_to edit_admins_recipe_path
+    if recipe.update(recipe_params)
+      flash[:notice] = '変更が保存されました。'
+      redirect_to edit_admins_recipe_path
+    else
+      @nav_info = Info.where(info_status: 0)
+      @recipe = Recipe.find(params[:id])
+      @user = @recipe.public_id
+      @recipe.ingredients.build
+      @recipe.cooks.build
+      flash.now[:error] = '変更をを保存できませんでした。'
+      render :edit
+    end
 	end
 
 	def destroy
     recipe = Recipe.find(params[:id])
     if recipe.destroy
+      flash[:error] = 'レシピが削除されました。'
       redirect_to admins_recipes_path
     else
       redirect_to admins_recipe_path(recipe)
@@ -43,10 +56,6 @@ private
     params.require(:recipe).permit(:public_id, :dish_name, :comment, :recipe_image,
       ingredients_attributes: [:id, :ingredient_name, :ingredient_amount, :_destroy],
       cooks_attributes:       [:id, :process_count, :process_text, :_destroy])
-  end
-
-  def nav_info
-    @nav_info = Info.where(info_status: 0)
   end
 
 end

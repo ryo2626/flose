@@ -21,6 +21,18 @@
   font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
+.notifications {
+  text-align: center;
+  .notice {
+    color: #00AA00;
+    background-color: #E6FFE9;
+  }
+  .error {
+    color: #AA0000;
+    background-color: #FFEEFF;
+  }
+}
+
 .top-box {
   background: rgba(0,0,0,0.8);
   color: white;
@@ -88,6 +100,12 @@
     min-width: 90%;
 }}
 
+.commodity{
+  background-color: #F5DEB3;
+  margin-top: 20px;
+  padding: 10px 0;
+}
+
 header {
   z-index: 9999;
   width: 100%;
@@ -113,11 +131,13 @@ footer{
 }
 
 .modal-dialog {
+  margin-top: 200px;
   min-width: 90%;
 }
 /*画面幅が781px以上の時*/
 @media screen and (min-width:992px){
   .modal-dialog {
+    margin-top: 160px;
     min-width: 50%;
   }
 }

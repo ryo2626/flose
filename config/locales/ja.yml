@@ -4,9 +4,9 @@ ja:
       admin: "管理者"
       commodity: "商品"
       company: "企業"
-      cook: "工程"
+      cooks: "工程"
       info: "お問い合わせ"
-      ingredient: "材料"
+      ingredients: "材料"
       public: "利用者"
       recipe: "レシピ"
       reserve: "予約"
@@ -19,7 +19,7 @@ ja:
         quantity: "残り数"
         limit: "いつまで？"
         commodity_category: "販売方法"
-      cook:
+      cooks:
         process_count: "工程順"
         process_text: "工程内容"
       info:
@@ -28,7 +28,7 @@ ja:
         contributor_email: "メールアドレス"
         info_content: "問い合わせ内容"
         info_status: "回答状況"
-      ingredient:
+      ingredients:
         ingredient_name: "材料名"
         ingredient_amount: "使用量"
       recipe:

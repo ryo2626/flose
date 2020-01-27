@@ -98,9 +98,15 @@
 
   <main>
     <div class="container">
+      <div class="notifications h3">
+        <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: key) %>
+        <% end %>
+      </div>
       <%= yield %>
     </div>
   </main>
+
 <% if company_signed_in? or public_signed_in? %>
   <footer>
     <%= link_to "お問い合わせ", new_info_path, class: "text-light" %>
