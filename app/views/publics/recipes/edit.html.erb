@@ -1,3 +1,4 @@
+
 <div class="row">
 	<div class="col text-center">
 		<h1 class="font-weight-bold">レシピ編集画面</h1>
@@ -5,17 +6,17 @@
 </div>
 
 <div class="row row1">
-	<div class="col-12 text-center">
+	<div class="col-12 text-center text-danger">
 		<% if @recipe.errors.any? %>
   		<% @recipe.errors.full_messages.each do |message| %>
-    	<h3><%= message %></h3>
+    		<h3>・<%= message %></h3>
   		<% end %>
 		<% end %>
 	</div>
 </div>
 
 <div class="row">
-	<div class="col-12 col-lg-6 offset-lg-3">
+	<div class="col-12 col-lg-8 offset-lg-2">
 		<%= form_for @recipe, url: publics_recipe_path, method: :patch do |form| %>
 			<%= form.hidden_field :public_id, :value => current_public.id %>
 
@@ -23,6 +24,7 @@
 		<%= form.text_field :dish_name, :placeholder => "必須", class: "form-control-lg w-100 text-center" %>
 
 		<h3 class="mt-4 mb-3"><span class="text-warning">■ </span>画像選択</h3>
+		<%= attachment_image_tag @recipe, :recipe_image, :fill, 1000, 1000, size: '200x180', fallback: "no_image.png" %>
 		<%= form.attachment_field :recipe_image %>
 
 		<h3 class="mt-4"><span class="text-warning">■ </span>コメント<span class="h6 text-secondary mt-4">※40文字以内</span></h3>
@@ -54,7 +56,6 @@
 				<%= form.submit '編集完了', class: "btn btn-lg btn-warning my-4 px-4" %>
 			</div>
 		</div>
-
 
 		<% end %>
 	</div>

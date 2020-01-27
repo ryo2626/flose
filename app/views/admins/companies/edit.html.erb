@@ -1,3 +1,13 @@
+<div class="row row1">
+  <div class="col-12 text-center text-danger">
+    <% if @user.errors.any? %>
+      <% @user.errors.full_messages.each do |message| %>
+        <h3>・<%= message %></h3>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
 <h1><span class="text-secondary">■</span>企業詳細・編集</h1>
 <% if @user.deleted? %>
   <div class="alert-danger text-center">

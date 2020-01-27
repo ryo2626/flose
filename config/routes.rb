@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   	resources :companies, only: [:index, :edit, :update, :destroy]
   	resources :recipes, only: [:index, :edit, :update, :destroy]
   	resources :commodities, only: [:index, :edit, :update, :destroy]
-    resources :info, only: [:index, :edit, :update, :destroy]
+    resources :info, only: [:index, :edit, :update]
   end
 
   namespace :publics do

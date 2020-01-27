@@ -1,5 +1,5 @@
 class Admins::CompaniesController < ApplicationController
-	before_action :nav_info, only: [:index, :edit]
+	before_action :authenticate_admin!
 
 	def index
 		@nav_info = Info.where(info_status: 0)
@@ -15,22 +15,31 @@ class Admins::CompaniesController < ApplicationController
 
 	def edit
 		@nav_info = Info.where(info_status: 0)
-		@user = Company.includes(:commodities).with_deleted.find(params[:id])
+		@user = Company.includes(:commodities)
+									 .with_deleted.find(params[:id])
   end
 
 	def update
 		@user = Company.with_deleted.find(params[:id])
-    @user.update(user_params)
-    redirect_to admins_companies_path(@user)
+    if @user.update(user_params)
+    	flash[:notice] = '変更が保存されました。'
+    	redirect_to admins_companies_path(@user)
+  	else
+  		@nav_info = Info.where(info_status: 0)
+  		flash.now[:error] = '変更できませんでした。'
+  		render :edit
+  	end
 	end
 
 	def destroy
 		@user = Company.with_deleted.find(params[:id])
 		if @user.deleted?
 			@user.restore
+			flash[:notice] = 'アカウント凍結が解除されました。'
 			redirect_to admins_companies_path
 		else
     	@user.destroy
+    	flash[:error] = 'アカウントを凍結されました。'
     	redirect_to admins_companies_path
     end
 	end
@@ -42,7 +51,4 @@ private
     params.require(:company).permit(:email, :company_name, :phone, :postalcode, :address)
   end
 
-  def nav_info
-    @nav_info = Info.where(info_status: 0)
-  end
 end
