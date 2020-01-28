@@ -1,2 +1,0 @@
-module Companies::UsersHelper
-end
