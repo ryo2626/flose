@@ -15,6 +15,9 @@ class InfoController < ApplicationController
   	end
   end
 
+  def about
+  end
+
 private
 
   def info_params

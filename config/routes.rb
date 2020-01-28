@@ -11,10 +11,9 @@ Rails.application.routes.draw do
     :passwords => 'companies/passwords',
     :sessions => 'companies/sessions'
   }
-
   devise_for :admins
 
-
+  get 'about' => 'info#about'
   resources :info, only: [:new, :create]
 
   namespace :admins do
@@ -31,6 +30,8 @@ Rails.application.routes.draw do
     get 'restaurant' => 'reserves#restaurant'
     resources :reserves, only: [:create]
   	resources :recipes
+    post   '/like/:recipe_id' => 'likes#like',   as: 'like'
+    delete '/like/:recipe_id' => 'likes#unlike', as: 'unlike'
   end
 
   namespace :companies do
