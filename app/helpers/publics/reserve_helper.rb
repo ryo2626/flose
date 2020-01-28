@@ -1,2 +1,0 @@
-module Public::ReserveHelper
-end
