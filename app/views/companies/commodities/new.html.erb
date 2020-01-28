@@ -1,0 +1,47 @@
+<h1>商品新規作成</h1>
+
+<div class="row row1">
+	<div class="col-12 text-center text-danger">
+		<% if @commodity.errors.any? %>
+  		<% @commodity.errors.full_messages.each do |message| %>
+    		<h3>・<%= message %></h3>
+  		<% end %>
+		<% end %>
+	</div>
+</div>
+
+<%= form_for @commodity, url: companies_commodities_path do |f| %>
+	<%= f.hidden_field :company_id, :value => current_company.id %>
+
+	<h3>商品名</h3>
+		<%= f.text_field :commodity_name %>
+
+	<h3>コメント</h3>
+		<%= f.text_field :comment %>
+
+	<h3>商品画像</h3>
+		<%= f.attachment_field :commodity_image %>
+
+	<h3>定価</h3>
+		<%= f.text_field :regular_price %>
+
+	<h3>販売価格</h3>
+		<%= f.text_field :sale_price %>
+
+	<h3>数量</h3>
+		<%= f.text_field :quantity %>
+
+	<h3>何時までに</h3>
+		<%= f.datetime_field :limit %>
+
+	<h3>販売方法<br>
+		<%= f.radio_button :commodity_category, :買いに来て欲しい %>
+    <%= f.label :買いに来て欲しい, class: "commodity_category_label" %>
+    <%= f.radio_button :commodity_category, :食べに来て欲しい %>
+    <%= f.label :食べに来て欲しい, class: "commodity_category_label" %>
+</h3><br>
+	<%= f.submit '商品情報更新' %>
+
+<% end %>
+
+

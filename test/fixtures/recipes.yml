@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  public_id: 1
+  dish_name: MyString
+  comment: MyString
+  recipe_image_id: MyString
+
+two:
+  public_id: 1
+  dish_name: MyString
+  comment: MyString
+  recipe_image_id: MyString

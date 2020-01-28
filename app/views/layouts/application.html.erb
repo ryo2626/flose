@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flose</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src="https://kit.fontawesome.com/a1b57a84c2.js" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+<body class='<%= "#{controller.controller_name}" %> font'>
+  <div class="wrapper">
+
+  <header>
+  <% if public_signed_in? %>
+    <nav class="navbar" style="background-color: #40575C;">
+      <%= link_to image_tag("logo.JPG", class: "image", height: "60"), root_path(current_public.id), class: "ml-2" %>
+      <h3 class="float-right mr-5">
+        <span class="text-light mr-1" style="font-size: 20px;">
+        ようこそ <%=current_public.lastname %>
+        </span>
+        <span class="text-light mr-4" style="font-size: 20px;">
+        <%=current_public.firstname %> 様
+        </span>
+        <span class="text-light ml-2 mr-2">/</span>
+        <%= link_to "マイページ", publics_user_path(current_public.id), class: "header_nav" %>
+        <span class="text-light ml-2 mr-2">/</span>
+        <%= link_to "ログアウト", destroy_public_session_path, method: :delete, class: " header_nav" %>
+        <span class="text-light ml-2">/</span>
+      </h3>
+    </nav>
+
+    <nav class="nav nav-pills nav-fill bg-warning">
+      <%= link_to publics_shop_path, class: "nav-item nav-link btn-warning border-secondary" do %>
+        <i class="fas fa-shopping-basket text-dark" style="font-size: 25px;">&nbsp;買いに行く</i>
+      <% end %>
+      <%= link_to publics_restaurant_path, class: "nav-item nav-link btn-warning border-secondary" do %>
+        <i class="fas fa-utensils text-dark" style="font-size: 25px;">&nbsp;食べに行く</i>
+      <% end %>
+      <%= link_to publics_recipes_path, class: "nav-item nav-link btn-warning" do %>
+        <i class="fas fa-file-alt text-dark" style="font-size: 25px;">&nbsp;レシピ</i>
+      <% end %>
+    </nav>
+
+
+  <% elsif company_signed_in? %>
+    <nav class="navbar" style="background-color: #40575C;">
+      <%= link_to image_tag("logo.JPG", class: "image", height: "60"), root_path, class: "ml-2" %>
+      <h3 class="float-right mr-5">
+        <span class="text-light mr-1">
+          ようこそ <%= current_company.company_name %> 様
+        </span>
+        <span class="text-light ml-2 mr-2">/</span>
+        <%= link_to "ログアウト", destroy_company_session_path, method: :delete, class: "header_nav" %>
+        <span class="text-light ml-2">/</span>
+      </h3>
+    </nav>
+
+    <nav class="nav nav-pills nav-fill bg-warning">
+      <%= link_to new_companies_commodity_path, class: "nav-item nav-link btn-warning" do %>
+        <i class="fas fa-shopping-basket text-dark" style="font-size: 25px;">  商品投稿</i>
+      <% end %>
+      <%= link_to companies_user_path(current_company), class: "nav-item nav-link btn-warning" do %>
+        <i class="fas fa-user-tie text-dark" style="font-size: 25px;">  会員情報</i>
+      <% end %>
+    </nav>
+
+
+  <% elsif admin_signed_in? %>
+    <nav class="navbar" style="background-color: #40575C;">
+      <%= link_to image_tag("logo.JPG", class: "image", height: "60"), admins_info_index_path, class: "ml-2" %>
+      <h3 class="float-right mr-5">
+        <span class="text-light">管理者ページ&nbsp;/&nbsp;</span>
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "header_nav" %>
+        <span class="text-light">&nbsp;/&nbsp;</span>
+      </h3>
+    </nav>
+
+    <nav class="nav nav-pills nav-fill bg-warning">
+      <%= link_to admins_info_index_path, class: "nav-item nav-link btn-warning" do %>お問い合わせ
+      <%if @nav_info.count > 0 %>
+        <span class="badge badge-pill badge-danger">
+      <% else %>
+        <span class="badge badge-pill badge-dark">
+      <% end %>
+        未読<%=@nav_info.count %>件</span>
+      <% end %>
+      <%= link_to "利用者一覧", admins_publics_path, class: "nav-item nav-link btn-warning" %>
+      <%= link_to "企業一覧", admins_companies_path, class: "nav-item nav-link btn-warning" %>
+      <%= link_to "商品一覧", admins_commodities_path, class: "nav-item nav-link btn-warning" %>
+      <%= link_to "レシピ一覧", admins_recipes_path, class: "nav-item nav-link btn-warning" %>
+    </nav>
+
+  <% else %>
+  <% end %>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="notifications h3">
+        <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: key) %>
+        <% end %>
+      </div>
+      <%= yield %>
+    </div>
+  </main>
+
+<% if company_signed_in? or public_signed_in? %>
+  <footer>
+    <%= link_to "・サイト概要", about_path, class: "text-light" %>
+    &emsp;
+    <%= link_to "・お問い合わせ", new_info_path, class: "text-light" %>
+  </footer>
+<% else %>
+  <footer>
+  </footer>
+      <% end %>
+  </div>
+</body>
+
+
+</html>

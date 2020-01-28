@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-6 offset-3 text-center">
+    <h3>空白検索で全ての企業</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6 offset-3 text-center">
+    <%= search_form_for @search, url:admins_companies_path do |f| %>
+      <%= f.search_field :company_name_cont, :placeholder => "企業名で曖昧検索", class: "form-control-lg" %>
+      <%= f.submit "検索", class: "btn-lg" %>
+    <% end %>
+  </div>
+</div>
+
+<ul>
+  <li><a href="#active" class="text-success h3">企業一覧へ</a></li>
+  <li><a href="#deleted" class="text-success h3">凍結中企業一覧へ</a></li>
+</ul>
+
+<section id="active">
+<h2><span class="text-secondary">■</span>企業一覧</h2>
+<% @result.each do |c| %>
+  <table class="table">
+  	<thead class="thead">
+  		<tr class="table-secondary">
+  		<th><h3><%= c.company_name %></h3>
+  		<th><th>
+  			<%= link_to "企業詳細・編集", edit_admins_company_path(c), class: "btn btn-light" %>
+  	</thead>
+  	<tbody class="tbody">
+  		<tr class="table-light">
+  		<td>電話番号:　<%= c.phone %>
+			<td>Email:　<%= c.email %>
+			<td>投稿件数:　<%= c.commodities.count %>
+		</tbody>
+	</table>
+<% end %>
+<%= paginate @result %>
+</section>
+
+
+<section id="deleted">
+<h2><span class="text-secondary">■</span>凍結中企業一覧</h2>
+<% @result_d.each do |c| %>
+  <table class="table">
+    <thead class="thead">
+      <tr class="table-secondary">
+      <th><h3><%= c.company_name %></h3>
+      <th><th>
+        <%= link_to "企業詳細・編集", edit_admins_company_path(c), class: "btn btn-light" %>
+    </thead>
+    <tbody class="tbody">
+      <tr class="table-light">
+      <td>電話番号:　<%= c.phone %>
+      <td>Email:　<%= c.email %>
+      <td>投稿件数:　<%= c.commodities.count %>
+    </tbody>
+  </table>
+<% end %>
+<%= paginate @result_d %>
+</section>
+
+<div id="back">
+  <a href="#">
+    <%= image_tag 'up.png', :size =>'60x60', class: "img" %>
+  </a>
+</div>
