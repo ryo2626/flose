@@ -1,0 +1,76 @@
+ja:
+  activerecord:
+    model:
+      admin: "管理者"
+      commodity: "商品"
+      company: "企業"
+      cooks: "工程"
+      info: "お問い合わせ"
+      ingredients: "材料"
+      public: "利用者"
+      recipe: "レシピ"
+      reserve: "予約"
+    attributes:
+      commodity:
+        commodity_name: "商品名"
+        comment: "コメント"
+        regular_price: "定価"
+        sale_price: "販売価格"
+        quantity: "残り数"
+        limit: "いつまで？"
+        commodity_category: "販売方法"
+      cooks:
+        process_count: "工程順"
+        process_text: "工程内容"
+      info:
+        user_status: "利用者区分"
+        contributor: "投稿者"
+        contributor_email: "メールアドレス"
+        info_content: "問い合わせ内容"
+        info_status: "回答状況"
+      ingredients:
+        ingredient_name: "材料名"
+        ingredient_amount: "使用量"
+      recipe:
+        dish_name: "料理名"
+        comment: "コメント"
+      public:
+        current_password: "現在のパスワード"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"
+        remember_me: "ログインを記憶"
+        lastname: "姓"
+        firstname: "名"
+        lastname_kana: "セイ"
+        firstname_kana: "メイ"
+        postalcode: "郵便番号"
+        address: "住所"
+        phone: "電話番号"
+        nickname: "ニックネーム"
+      company:
+        current_password: "現在のパスワード"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"
+        remember_me: "ログインを記憶"
+        company_name: "企業名"
+        postalcode: "郵便番号"
+        address: "住所"
+        phone: "電話番号"
+
+      admin:
+        current_password: "現在のパスワード"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"
+        remember_me: "ログインを記憶"
+  views:
+      pagination:
+        first: '最初'
+        last: '最後'
+        previous: '前'
+        next: '次'
+        truncate: '...'
+
+

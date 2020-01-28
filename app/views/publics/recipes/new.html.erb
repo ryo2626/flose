@@ -1,0 +1,60 @@
+<div class="row">
+	<div class="col text-center">
+		<h1 class="font-weight-bold">レシピ投稿画面</h1>
+	</div>
+</div>
+
+<div class="row row1">
+	<div class="col-12 text-center text-danger">
+		<% if @recipe.errors.any? %>
+  		<% @recipe.errors.full_messages.each do |message| %>
+    		<h3>・<%= message %></h3>
+  		<% end %>
+		<% end %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-12 col-lg-8 offset-lg-2">
+		<%= form_for @recipe, url: publics_recipes_path, method: :post do |form| %>
+			<%= form.hidden_field :public_id, :value => current_public.id %>
+
+		<h3 class="mt-4"><span class="text-warning">■ </span>料理名<span class="h6 text-secondary mt-4">※20文字以内</span></h3>
+		<%= form.text_field :dish_name, :placeholder => "必須", class: "form-control-lg w-100" %>
+
+		<h3 class="mt-4 mb-3"><span class="text-warning">■ </span>画像選択</h3>
+		<%= form.attachment_field :recipe_image %>
+
+		<h3 class="mt-4"><span class="text-warning">■ </span>コメント<span class="h6 text-secondary mt-4">※40文字以内</span></h3>
+		<%= form.text_area :comment, :placeholder => "必須", class: "form-control-lg w-100" %>
+
+		<h3 class="mt-4"><span class="text-warning">■ </span>材料</h3>
+		<%= form.fields_for :ingredients do |f| %>
+    	<%= render "ingredients_fields", f: f %>
+  	<% end %>
+
+		<div class="links">
+			<%= link_to_add_association "＋", form, :ingredients, partial: "ingredients_fields", class: "btn btn-secondary btn-outline-light mt-3 ml-3" %>
+			<span class="h6 text-secondary ml-3">材料を追加</span>
+		</div>
+
+
+		<h3 class="mt-5"><span class="text-warning">■ </span>工程</h3>
+			<%= form.fields_for :cooks do |f| %>
+    		<%= render "cooks_fields", f: f %>
+  		<% end %>
+
+		<div class="links">
+			<%= link_to_add_association "＋", form, :cooks, partial: "cooks_fields", class: "btn btn-secondary btn-outline-light mt-3 ml-3" %>
+			<span class="h6 text-secondary">工程を追加</span>
+		</div>
+
+		<div class="row">
+			<div class="col text-center">
+				<%= form.submit 'レシピ作成', class: "btn btn-lg btn-warning my-4 px-4" %>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</div>
+

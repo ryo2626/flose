@@ -1,0 +1,36 @@
+<div class ="row">
+  <div class ="col-12 col-lg-6 offset-lg-3">
+    <div class="card border-dark w-100">
+      <div class="card-header text-center bg-info border-dark">
+        <h2>企業様ログイン</h2>
+      </div>
+      <div class="card-body text-center border-dark">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+      <h3 class="mt-4">メールアドレス</h3>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control-lg w-75 mt-2 text-center" %>
+
+      <h3 class="mt-4">パスワード</h3>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control-lg w-75 mt-2 text-center" %>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field mt-3 h5">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit "ログイン", class: "btn btn-lg btn-info btn-outline-primary text-white w-75 mt-3 font-weight-bolder" %>
+      </div>
+        <% end %>
+      <br>
+      <%= render "devise/links" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bubbly-bg@1.0.0/dist/bubbly-bg.js" class="public"></script>
