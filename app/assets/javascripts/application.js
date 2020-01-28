@@ -29,11 +29,11 @@ $(document).ready(function(){
   });
 
 bubbly({
+  bubbleFunc:() => `hsla(${Math.random() * 10000}, 100%, 50%, .2)`,
   colorStart: '#ffffff',
   colorStop: '#FFAD90',
   blur: 1,
   compose: 'source-over',
-  bubbleFunc:() => `hsla(${Math.random() * 10000}, 100%, 50%, .2)`
 });
 
 });

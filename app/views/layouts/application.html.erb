@@ -109,7 +109,9 @@
 
 <% if company_signed_in? or public_signed_in? %>
   <footer>
-    <%= link_to "お問い合わせ", new_info_path, class: "text-light" %>
+    <%= link_to "・サイト概要", about_path, class: "text-light" %>
+    &emsp;
+    <%= link_to "・お問い合わせ", new_info_path, class: "text-light" %>
   </footer>
 <% else %>
   <footer>

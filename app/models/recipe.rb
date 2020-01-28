@@ -3,6 +3,8 @@ class Recipe < ApplicationRecord
 	attachment :recipe_image
 
 	belongs_to :public
+	has_many :likes, dependent: :destroy
+  has_many :liking_piblics, through: :likes, source: :public
 
 	has_many :ingredients, dependent: :destroy
 	accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: true

@@ -5,6 +5,9 @@ class Public < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
 	has_many :recipes
+  has_many :likes, dependent: :destroy
+  has_many :like_recipes, through: :likes, source: :recipe
+
 	has_many :reserves
 	has_many :infos
 

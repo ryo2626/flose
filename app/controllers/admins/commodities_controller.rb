@@ -1,6 +1,5 @@
 class Admins::CommoditiesController < ApplicationController
 	before_action :authenticate_admin!
-	before_action :nav_info, only: [:index, :edit]
 
 	def index
 		@nav_info = Info.where(info_status: 0)
