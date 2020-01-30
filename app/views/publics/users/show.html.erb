@@ -11,7 +11,7 @@
 <div class="row">
   <div class="col-12">
     <span class="h1">ユーザーマイページ</span>
-    <button type="button" class="btn btn-primary h4 ml-5 p-3 p-lg-2" data-toggle="modal" data-target="#staticBackdrop">
+    <button type="button" class="btn btn-secondary h4 ml-5 p-3 p-lg-2" data-toggle="modal" data-target="#staticBackdrop">
       登録住所編集
     </button>
   </div>
@@ -22,8 +22,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
-      <div class="modal-header bg-warning">
-        <h3 class="modal-title font-weight-bold" id="staticBackdropLabel">編集フォーム</h3>
+      <div class="modal-header bg-secondary">
+        <h3 class="modal-title text-light font-weight-bold" id="staticBackdropLabel">編集フォーム</h3>
         <button type="button" class="btn-lg btn-secondary" data-dismiss="modal" aria-label="閉じる">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -86,12 +86,22 @@
     </div>
   </div>
 </div>
+<ul>
+  <li><a href="#reserve">予約履歴</a></li>
+  <li><a href="#reserve_d">過去の予約</a></li>
+  <li><a href="#recipe-like">お気に入りレシピ</a></li>
+  <li><a href="#recipe">投稿レシピ</a></li>
+</ul>
+<h2 class="mt-5"><span class="text-warning">■</span>お得金額の総計</h2>
+  <% if @user.profit_price == nil %>
+    <h3>&emsp;購入したことがありません</h3>
+  <% else %>
+    <h3>&emsp;<%= @user.profit_price %> 円</h3>
+  <% end %>
 
-<h2><span class="text-warning">■</span>お得金額の総計</h2>
-  <h3>&emsp;<%= @user.profit_price %> 円</h3>
-
-<h2><span class="text-warning">■</span>予約履歴</h2>
-<h3>販売中</h3>
+<section id="reserve">
+<h2 class="mt-5"><span class="text-warning">■</span>予約履歴</h2>
+<h3 class="mt-2">販売中</h3>
 <% if @reserve.count == 0 %>
   <span class="text-secondary h4">
     &emsp;販売中の予約はありません
@@ -112,6 +122,7 @@
           </thead>
           <tbody class="tbody table-light">
             <% if r.commodity.company.deleted? %>
+            <tr>
               <td>退会した企業
               <td>
               <td>
@@ -140,8 +151,10 @@
     </div>
   <% end %>
 <% end %>
+</section>
 
-<h3>販売終了</h3>
+<section id="reserve_d">
+<h3 class="mt-2">販売終了</h3>
 <% if @reserve_d.count == 0 %>
   <span class="text-secondary h4">
     &emsp;予約履歴はありません
@@ -190,9 +203,53 @@
     </div>
   <% end %>
 <% end %>
-
 <div class="row">
   <div class="col text-center">
     <%= paginate @reserve_d %>
   </div>
+</div>
+</section>
+
+<section id="recipe-like">
+<h2 class="mt-5"><span class="text-warning">■</span>お気に入りしたレシピ</h2>
+  <% @recipe_like.each do |f| %>
+  <table class="table">
+    <thead class="thead thead-light">
+      <tr>
+        <th>画像
+        <th>料理名
+        <th>リンク
+    <tbody class="tbody table-light">
+      <tr>
+        <td class="text-center"><%= attachment_image_tag f.recipe, :recipe_image, :fill, 1000, 1000, size: '100x100', fallback: "no_image.png" %>
+        <td><%= f.recipe.dish_name %>
+        <td><%= link_to "レシピ詳細", publics_recipe_path(f.recipe), class: "btn btn-success" %>
+    </tbody>
+  </table>
+  <% end %>
+</section>
+
+<section id="recipe">
+  <h2 class="mt-5"><span class="text-warning">■</span>投稿したレシピ</h2>
+  <% @recipe.each do |f| %>
+    <table class="table">
+    <thead class="thead thead-light">
+      <tr>
+        <th>画像
+        <th>料理名
+        <th>リンク
+    <tbody class="tbody table-light">
+      <tr>
+        <td class="text-center"><%= attachment_image_tag f, :recipe_image, :fill, 1000, 1000, size: '100x100', fallback: "no_image.png" %>
+        <td><%= f.dish_name %>
+        <td><%= link_to "レシピ編集", edit_publics_recipe_path(f), class: "btn btn-success" %>
+    </tbody>
+  </table>
+  <% end %>
+</section>
+
+<div id="back">
+  <a href="#">
+    <%= image_tag 'up.png', :size =>'60x60', class: "img" %>
+  </a>
 </div>

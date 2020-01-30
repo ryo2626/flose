@@ -11,6 +11,8 @@ class Publics::UsersController < ApplicationController
                         .where(Commodity.arel_table[:limit].lt(Time.now))
                         .order(created_at: :desc)
                         .page(params[:page]).per(20)
+    @recipe_like = Like.where(public_id: @user.id)
+    @recipe = Recipe.where(public_id: @user.id)
   end
 
   def update

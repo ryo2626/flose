@@ -130,9 +130,11 @@
     </footer>
   <% else %>
     <footer>
-      <%= link_to "・サイト概要", about_path, class: "text-light" %>
+      <h5>
+        <%= link_to "・サイト概要", about_path, class: "text-light" %>
       &emsp;
-      <%= link_to "・お問い合わせ", new_info_path, class: "text-light" %>
+        <%= link_to "・お問い合わせ", new_info_path, class: "text-light" %>
+      </h5>
     </footer>
   <% end %>
   </div>

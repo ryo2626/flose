@@ -8,10 +8,11 @@
   </div>
 </div>
 
-<h1>企業詳細・投稿一覧</h1>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-  登録情報編集
-</button>
+<h1>企業詳細・投稿一覧
+  <button type="button" class="btn btn-secondary ml-5" data-toggle="modal" data-target="#staticBackdrop">
+    登録情報編集
+  </button>
+</h1>
 
 <!-- モーダルの設定 -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -61,37 +62,51 @@
   </div>
 </div>
 
-<h1>販売中</h1>
-<table class="table">
-	<thead class="thead thead-light">
-		<th>商品名
-		<th>販売価格
-		<th>期限
-		<th>残り時間
-		<th>販売形態
-		<th>詳細
-	</thead>
-  <tbody class="tbody table-light">
-    <% @commodity.each do |c| %>
+<h1 class="mt-3">販売中</h1>
 
-      <% if c.limit > Time.now %>
-       <tr>
+<% @commodity.each do |c| %>
+  <% if c.limit > Time.now %>
+  <div class="row">
+    <div class="col-1 text-right">
+      <%= attachment_image_tag c, :commodity_image, :fill, 1000, 1000, size: '100x100', fallback: "no_image.png", class: "mt-0" %>
+    </div>
+    <div class="col-11">
+  <table class="table">
+    <thead class="thead thead-light">
+      <tr>
+        <th>商品名
+        <th>販売価格
+        <th>期限
+        <th>残り時間
+        <th>販売形態
+        <th>詳細
+    </thead>
+    <tbody class="tbody table-light">
+      <tr>
 		    <td><%= c.commodity_name %>
 		    <td><%= c.sale_price %>円
 		    <td><%= c.limit.strftime("%m月%d日 %H:%M まで") %>
-
           <% @limit = (c.limit - Time.now).to_i / 60 %>
           <% @limit_h = @limit /60 %>
           <% @limit_m = @limit % 60 %>
         <td>残り約<%= @limit_h %>時間<%= @limit_m %>分
         <td><%= c.commodity_category %>
         <td><%= link_to "詳細", companies_commodity_path(c), class: "btn btn-success" %>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+  </div>
+  </div>
+  <% end %>
+<% end %>
 
-<h1>販売終了</h1>
+<h1 class="mt-3">販売終了</h1>
+  <% @commodity.each do |c| %>
+    <% if c.limit < Time.now %>
+  <div class="row">
+    <div class="col-1 text-right">
+      <%= attachment_image_tag c, :commodity_image, :fill, 1000, 1000, size: '100x100', fallback: "no_image.png", class: "mt-0" %>
+    </div>
+    <div class="col-11">
 <table class="table">
   <thead class="thead thead-light">
     <th>商品名
@@ -101,9 +116,8 @@
     <th>販売形態
     <th>詳細
   </thead>
-  <% @commodity.each do |c| %>
     <tbody class="tbody table-light">
-      <% if c.limit < Time.now %>
+
         <tr>
           <td><%= c.commodity_name %>
           <td><%= c.sale_price %>円
@@ -111,8 +125,11 @@
           <td>販売終了
           <td><%= c.commodity_category %>
           <td><%= link_to "詳細", companies_commodity_path(c), class: "btn btn-success" %>
-      <% end %>
+
     </tbody>
-  <% end %>
 </table>
+</div>
+<% end %>
+  <% end %>
+
 
