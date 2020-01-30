@@ -28,10 +28,42 @@
 }}
 
 @media only screen and (max-width: 992px) {
+
   .nav-bar1 {
     .nav-item{
       font-size: 40px;
-  }}}
+  }}
+  .users {
+  table {
+    width: 100%;
+  }
+  table tr {
+    display: block;
+    float: left;
+  }
+  table tr td, table tr th {
+    display: block;
+    height: 40px;
+  }
+  table thead {
+    text-align: center;
+    display: block;
+    float: left;
+    width: 25%;
+  }
+  table thead tr {
+    text-align: center;
+    width: 100%;
+  }
+  table tbody {
+    display: block;
+    float: left;
+    width: 75%;
+  }
+  table tbody tr {
+    width: 100%;
+  }
+}}
 
 /*エラーメッセージ・サクセスメッセージ*/
 .notifications {
@@ -43,7 +75,8 @@
   .error {
     color: black;
     background-color: rgba(200,0,0,.5);
-}}
+  }
+}
 
 /*一番上までスクロール*/
 #back {
@@ -63,6 +96,10 @@
 }
 .text_height {
   height: 80px;
+}
+
+.text_height2 {
+  height: 170px;
 }
 .recipe_img {
   position: relative;
@@ -160,35 +197,6 @@ footer{
     padding: 60px 10px;
     min-height: 100vh;
     min-width: 90%;
-  table {
-    width: 100%;
-  }
-  table tr {
-    display: block;
-    float: left;
-  }
-  table tr td, table tr th {
-    display: block;
-    height: 40px;
-  }
-  table thead {
-    text-align: center;
-    display: block;
-    float: left;
-    width: 25%;
-  }
-  table thead tr {
-    text-align: center;
-    width: 100%;
-  }
-  table tbody {
-    display: block;
-    float: left;
-    width: 75%;
-  }
-  table tbody tr {
-    width: 100%;
-  }
 }}
 
 /*商品一覧*/

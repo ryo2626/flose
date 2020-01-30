@@ -1,11 +1,19 @@
-<h4>レシピ詳細画面</h4>
+
 <% if @recipe.public == current_public %>
 <%= link_to "レシピ編集", edit_publics_recipe_path(@recipe), class: "btn btn-success" %>
 <% else %>
 <% end %>
-	<h1><%= @recipe.dish_name %></h1>
+<div class="row">
+	<div class="col-12 text-center">
+		<h1><%= @recipe.dish_name %></h1>
+	</div>
+	<div class="col-12 text-center">
+		<%= attachment_image_tag @recipe, :recipe_image, :fill, 1000, 1000, size: '300x250', fallback: "no_image.png" %>
+	</div>
+	<div class="col-10 offset-1">
 	<h3><%= @recipe.comment %></h3>
-
+	</div>
+</div>
 <!-- 材料の種類が奇数or偶数 -->
 <% if @ingredients.odd? %>
   <% @first = @recipe.ingredients.first((@ingredients/2)+1) %>
@@ -53,11 +61,11 @@
 		<% @recipe.cooks.each do |c| %>
 			<table class="table table-bordered">
 				<thead class="thead thead-light">
-					<th class="h3"><%= c.process_count %>.
+					<th class="h4"><%= c.process_count %>.
 				</thead>
 				<tbody class="tbody">
 					<tr class="table-light">
-						<td class="h3"><%= c.process_text %>
+						<td class="h4"><%= c.process_text %>
 				</tbody>
 			</table>
 		<% end %>

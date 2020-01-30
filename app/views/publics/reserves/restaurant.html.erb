@@ -23,7 +23,7 @@
 <div class="row">
 	<% @result.each do |r| %>
 
-	<% if r.limit > Time.now and r.quantity > 0 %>
+	<% if r.limit > Time.now && r.quantity > 0 %>
 
 		<div class="col-lg-3 col-6">
 			<div class="commodity commodity1">
@@ -50,6 +50,16 @@
 
 				<div class="row">
 					<div class="col-10 offset-1 text-center">
+						<div class="row">
+							<div class="col-12 text-center text_height2">
+								<h3><%= r.company.address %></h3>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 text-center">
+								<h3><%= link_to '地図アプリで開く', "https://www.google.com/maps/search/?api=1&query=#{r.company.address}".html_safe, class: 'button' %></h3>
+							</div>
+						</div>
 						<h3>残り数: <%= r.quantity %></h3>
 		    		<% @limit = (r.limit - Time.now).to_i / 60 %>
         		<% @limit_h = @limit /60 %>

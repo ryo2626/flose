@@ -23,7 +23,7 @@
       <% @status = "その他" %>
     <% end %>
 
-    <% if public_signed_in? or company_signed_in? %>
+    <% if public_signed_in? || company_signed_in? %>
 			<%= f.hidden_field :public_id, :value => @user.id %>
 			<%= f.hidden_field :company_id, :value => @user.id %>
 			<%= f.hidden_field :contributor, :value => @user_name %>
