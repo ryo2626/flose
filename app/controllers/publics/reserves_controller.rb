@@ -1,5 +1,5 @@
 class Publics::ReservesController < ApplicationController
-  before_action :authenticate_public!
+  before_action :authenticate_public!, only: [:create]
 
   def shop
     @reserve = Reserve.new
@@ -32,7 +32,7 @@ class Publics::ReservesController < ApplicationController
     commodity.quantity -= 1
   # 商品の定価と販売価格の差をユーザーのお得金額に足す
     user = current_public
-    user.profit_price = @user.profit_price.to_i + (@commodity.regular_price.to_i - @commodity.sale_price.to_i)
+    user.profit_price = user.profit_price.to_i + (commodity.regular_price.to_i - commodity.sale_price.to_i)
   # 各テーブル保存
     unless user.save
       flash[:error] = '予約できませんでした。'

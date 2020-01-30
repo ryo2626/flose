@@ -13,7 +13,7 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, placeholder: "必須", required: true, class: "form-control-lg w-100"  %>
   </div>
 
   <div class="field">
@@ -32,8 +32,6 @@
     <%= f.submit "Log in" %>
   </div>
 <% end %>
-
-<%= render "admins/shared/links" %>
 
       </div>
     </div>
