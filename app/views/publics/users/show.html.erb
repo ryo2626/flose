@@ -8,10 +8,14 @@
   </div>
 </div>
 
-<h1>ユーザーマイページ</h1>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-  登録住所編集
-</button>
+<div class="row">
+  <div class="col-12">
+    <span class="h1">ユーザーマイページ</span>
+    <button type="button" class="btn btn-primary h4 ml-5 p-3 p-lg-2" data-toggle="modal" data-target="#staticBackdrop">
+      登録住所編集
+    </button>
+  </div>
+</div>
 
 <!-- モーダルの設定 -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -28,7 +32,6 @@
   <div class="row">
     <div class="col-12 col-lg-10 offset-lg-1">
       <div class="modal-body">
-
         <%= form_for @user, url: publics_user_path, method: :patch do |f|%>
           <div class="row">
             <div class="col">
@@ -41,7 +44,6 @@
                 <%= f.text_field :lastname_kana, class: 'form-control-lg w-100 text-center' %>
               </div>
             </div>
-
             <div class="col">
               <div class="field">
                 <%= f.label :firstname %>
@@ -53,7 +55,6 @@
               </div>
             </div>
           </div>
-
           <div class="field">
             <%= f.label :nickname %>
             <%= f.text_field :nickname, class: 'form-control-lg w-100 text-center' %>
@@ -82,71 +83,114 @@
       </div>
     </div>
   </div>
-
     </div>
   </div>
 </div>
 
-<h1>お得金額の総計</h1>
-  <h3><%= @user.profit_price %> 円</h3>
+<h2><span class="text-warning">■</span>お得金額の総計</h2>
+  <h3>&emsp;<%= @user.profit_price %> 円</h3>
 
-<h1>予約履歴</h1>
-<h2>販売中</h2>
-	<table class="table">
-		<thead class="thead thead-light">
-			<th>店名
-			<th>住所
-			<th>リンク
-			<th>商品名
-			<th>販売形態
-			<th>時間
-		</thead>
-    <tbody class="tbody">
+<h2><span class="text-warning">■</span>予約履歴</h2>
+<h3>販売中</h3>
+<% if @reserve.count == 0 %>
+  <span class="text-secondary h4">
+    &emsp;販売中の予約はありません
+  </span>
+<% else %>
 	<% @reserve.each do |r| %>
-    <tr>
-      <% if r.commodity.company.deleted? %>
-        <td>退会した企業
-        <td>
-        <td>
-      <% else %>
-        <td><%= r.commodity.company.company_name %>
-        <td><%= r.commodity.company.address %>
-        <td><%= link_to '地図アプリで開く', "https://www.google.com/maps/search/?api=1&query=#{r.commodity.company.address
-    }".html_safe, class: 'button' %>
-      <% end %>
-			<td><%= r.commodity.commodity_name %>
-			<td><%= r.commodity.commodity_category %>
-			<td><%= r.commodity.limit.strftime("%m月%d日 %H:%M まで") %>
-	  <% end %>
-</tdody>
-</table>
+    <div class="row">
+      <div class="col-2 text-center">
+        <%= attachment_image_tag r.commodity, :commodity_image, :fill, 1000, 1000, size: '150x150', fallback: "no_image.png" %>
+      </div>
+      <div class="col-10">
+        <table class="table mb-0 table-bordered">
+          <thead class="thead thead-light">
+            <tr>
+              <th>店名
+              <th>住所
+              <th>リンク
+          </thead>
+          <tbody class="tbody table-light">
+            <% if r.commodity.company.deleted? %>
+              <td>退会した企業
+              <td>
+              <td>
+            <% else %>
+              <td><%= r.commodity.company.company_name %>
+              <td><%= r.commodity.company.address %>
+              <td><%= link_to '地図アプリで開く', "https://www.google.com/maps/search/?api=1&query=#{r.commodity.company.address}".html_safe, class: 'button' %>
+            <% end %>
+          </tdody>
+        </table>
+        <table class="table table-bordered">
+          <thead class="thead thead-light">
+            <tr>
+              <th>商品名
+              <th>販売形態
+              <th>時間
+            </thead>
+            <tbody class="tbody table-light">
+              <tr>
+			          <td><%= r.commodity.commodity_name %>
+			          <td><%= r.commodity.commodity_category %>
+			          <td><%= r.commodity.limit.strftime("%m月%d日 %H:%M まで") %>
+            </tdody>
+          </table>
+      </div>
+    </div>
+  <% end %>
+<% end %>
 
-<h2>販売終了</h2>
-  <table class="table">
-    <thead class="thead thead-light">
-      <th>店名
-      <th>住所
-      <th>商品名
-      <th>販売形態
-      <th>時間
-    </thead>
+<h3>販売終了</h3>
+<% if @reserve_d.count == 0 %>
+  <span class="text-secondary h4">
+    &emsp;予約履歴はありません
+  </span>
+<% else %>
   <% @reserve_d.each do |r| %>
-  <tbody class="tbody">
-    <tr class="table-light">
-      <% if r.commodity.company.deleted? %>
-        <td>退会した企業
-        <td>
-      <% else %>
-        <td><%= r.commodity.company.company_name %>
-        <td><%= r.commodity.company.address %>
-      <% end %>
-      <td><%= r.commodity.commodity_name %>
-      <td><%= r.commodity.commodity_category %>
-      <td><%= r.commodity.limit.strftime("%m月%d日 %H:%M まで") %>
-    </tdody>
-    <% end %>
+    <div class="row">
+      <div class="col-2 text-center">
+        <%= attachment_image_tag r.commodity, :commodity_image, :fill, 1000, 1000, size: '150x150', fallback: "no_image.png" %>
+      </div>
+      <div class="col-10">
+        <table class="table mb-0 table-bordered">
+          <thead class="thead thead-light">
+            <tr>
+              <th>店名
+              <th>住所
+              <th>リンク
+          </thead>
+          <tbody class="tbody table-light">
+            <% if r.commodity.company.deleted? %>
+              <td>退会した企業
+              <td>
+              <td>
+            <% else %>
+              <td><%= r.commodity.company.company_name %>
+              <td><%= r.commodity.company.address %>
+              <td><%= link_to '地図アプリで開く', "https://www.google.com/maps/search/?api=1&query=#{r.commodity.company.address}".html_safe, class: 'button' %>
+            <% end %>
+          </tdody>
+        </table>
+        <table class="table table-bordered">
+          <thead class="thead thead-light">
+            <tr>
+              <th>商品名
+              <th>販売形態
+              <th>時間
+            </thead>
+            <tbody class="tbody table-light">
+              <tr>
+                <td><%= r.commodity.commodity_name %>
+                <td><%= r.commodity.commodity_category %>
+                <td><%= r.commodity.limit.strftime("%m月%d日 %H:%M まで") %>
+            </tdody>
+          </table>
+      </div>
+    </div>
+  <% end %>
+<% end %>
 
-</table>
 <div class="row">
   <div class="col text-center">
     <%= paginate @reserve_d %>

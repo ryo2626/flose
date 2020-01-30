@@ -17,152 +17,53 @@
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c&display=swap');
 
+/*フォント関連*/
 .font {
   font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
+.nav-bar1 {
+  .nav-item{
+    font-size: 25px;
+}}
+
+@media only screen and (max-width: 992px) {
+  .nav-bar1 {
+    .nav-item{
+      font-size: 40px;
+  }}}
+
+/*エラーメッセージ・サクセスメッセージ*/
 .notifications {
   text-align: center;
   .notice {
-    color: #00AA00;
-    background-color: #E6FFE9;
+    color: black;
+    background-color: rgba(0,200,0,.5);
   }
   .error {
-    color: #AA0000;
-    background-color: #FFEEFF;
-  }
+    color: black;
+    background-color: rgba(200,0,0,.5);
+}}
+
+/*一番上までスクロール*/
+#back {
+  position: fixed;
+  bottom: 90px;
+  right: 90px;
 }
 
-.top-box {
-  background: rgba(0,0,0,0.8);
-  color: white;
-}
-
-.users {
-  background-image: image-url('user_bg.JPG');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
-  .container {
-    background-color: #FFFFEF;
-    padding-top: 30px;
-    min-height: 100vh;
-    min-width: 90%;
-}}
-
-/*商品一覧*/
-.reserves {
-  background-image: image-url('reserve.JPG'); background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
-  .container {
-    background-color: #FFFFEF;
-    padding-top: 30px;
-    min-height: 100vh;
-    min-width: 90%;
-}}
-
-.recipes {
-  background-image: image-url('recipe.JPG'); background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
-  .container {
-    background-color: #FFFFEF;
-    padding: 30px;
-    min-height: 100vh;
-    min-width: 90%;
-}}
-
-/*TOP・Admin側　背景*/
-.info {
-	background-image: image-url('info_bg.PNG');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
-  .container {
-    padding-top: 30px;
-}}
-
-.publics,.commodities,.companies {
-  background-image: image-url('info_bg.PNG');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
-  .container {
-    background-color: #FFFFEF;
-    padding: 30px;
-    min-height: 100vh;
-    min-width: 90%;
-}}
-
+/*商品・レシピ一覧・ホバーでのコメント表示*/
 .commodity{
   background-color: #F5DEB3;
   margin-top: 20px;
   padding: 10px 0;
 }
-
-header {
-  z-index: 9999;
-  width: 100%;
-  padding:0;
-  position: fixed;
-  top: 0;
-}
-
-.wrapper{
-    min-height: 100vh;
-    position: relative;
-    padding-top: 115px;
-    padding-bottom: 80px;
-}
-
-footer{
-  width: 100%;
-  background-color: gray;
-  text-align: center;
-  padding: 30px 0;
-  position: absolute;
-  bottom: 0;
-}
-
-.modal-dialog {
-  margin-top: 200px;
-  min-width: 90%;
-}
-/*画面幅が781px以上の時*/
-@media screen and (min-width:992px){
-  .modal-dialog {
-    margin-top: 160px;
-    min-width: 50%;
-  }
-}
-#back {
-  position: fixed;
-  bottom: 90px;
-  right: 90px;
-  }
-
-.header_nav {
-  color: #ffbb33;
-}
-
-.header_nav:hover {
-  color: white;
-  text-decoration: none;
-}
-
 .image_height {
   height: 200px;
 }
 .text_height {
   height: 80px;
 }
-
 .recipe_img {
   position: relative;
   display: block;
@@ -202,7 +103,190 @@ footer{
   }
 }
 
+/*ページネーション*/
 .pagination {
   justify-content: center;
 }
 
+/*ヘッダー*/
+header {
+  z-index: 9999;
+  width: 100%;
+  padding:0;
+  position: fixed;
+  top: 0;
+}
+.header_nav {
+  color: #ffbb33;
+}
+.header_nav:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.wrapper{
+  min-height: 100vh;
+  position: relative;
+  padding-top: 115px;
+  padding-bottom: 80px;
+}
+
+/*フッター*/
+footer{
+  width: 100%;
+  background-color: gray;
+  text-align: center;
+  padding: 30px 0;
+  position: absolute;
+  bottom: 0;
+}
+
+.registrations,.sessions {
+  .container {
+    padding: 60px 10px;
+    min-height: 100vh;
+    min-width: 90%;
+}}
+
+/*ユーザー画面*/
+.users {
+  background-image: image-url('user_bg.JPG');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  .container {
+    background-color: #FFFFEF;
+    padding: 60px 10px;
+    min-height: 100vh;
+    min-width: 90%;
+  table {
+    width: 100%;
+  }
+  table tr {
+    display: block;
+    float: left;
+  }
+  table tr td, table tr th {
+    display: block;
+    height: 40px;
+  }
+  table thead {
+    text-align: center;
+    display: block;
+    float: left;
+    width: 25%;
+  }
+  table thead tr {
+    text-align: center;
+    width: 100%;
+  }
+  table tbody {
+    display: block;
+    float: left;
+    width: 75%;
+  }
+  table tbody tr {
+    width: 100%;
+  }
+}}
+
+/*商品一覧*/
+.reserves {
+  background-image: image-url('reserve.JPG'); background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  .container {
+    background-color: #FFFFEF;
+    padding: 60px 10px;
+    min-height: 100vh;
+    min-width: 90%;
+}}
+
+/*レシピ画面*/
+.recipes {
+  background-image: image-url('recipe.JPG'); background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  .container {
+    background-color: #FFFFEF;
+    padding: 60px 10px;
+    min-height: 100vh;
+    min-width: 90%;
+}}
+
+/*TOP・Admin側　背景*/
+.info {
+	background-image: image-url('info_bg.PNG');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  .container {
+    padding: 70px 10px;
+    min-width: 95%;
+}}
+
+
+.publics,.commodities,.companies {
+  background-image: image-url('info_bg.PNG');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  .container {
+    background-color: #FFFFEF;
+    padding: 70px 10px;
+    min-height: 100vh;
+    min-width: 90%;
+}}
+
+/*トップフェードイン*/
+.top-box {
+  background: rgba(0,0,0,0.8);
+  color:  #ADD8E6;
+}
+.top-text1 {
+    animation-name: fadein;
+    animation-duration: 2s;
+}
+.top-text2 {
+    animation-name: fadein;
+    animation-duration: 4s;
+}
+.top-text3 {
+    animation-name: fadein;
+    animation-duration: 6s;
+}
+.top-text4 {
+    animation-name: fadein;
+    animation-duration: 8s;
+}
+@keyframes fadein {
+from {
+    opacity: 0;
+}
+to {
+    opacity: 1;
+}}
+
+/*モーダル*/
+.modal-dialog {
+  margin-top: 200px;
+  min-width: 90%;
+}
+/*画面幅が781px以上の時*/
+@media screen and (min-width:992px){
+  .modal-dialog {
+    margin-top: 160px;
+    min-width: 50%;
+  }
+}
+
+/*レスポンシブ*/
+@media screen and (min-width:992px){
+
+
+}

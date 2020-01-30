@@ -1,4 +1,4 @@
-<div class ="row">
+<div class ="row mb-5">
   <div class ="col-12 col-lg-6 offset-lg-3">
     <div class="card border-dark w-100">
       <div class="card-header text-center bg-warning border-dark">
@@ -8,7 +8,7 @@
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
       <h3 class="mt-4">メールアドレス</h3>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control-lg w-75 mt-2 text-center" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: " w-75 mt-2 text-center" %>
 
       <h3 class="mt-4">パスワード</h3>
         <%= f.password_field :password, autocomplete: "current-password", class: "form-control-lg w-75 mt-2 text-center" %>
@@ -21,7 +21,7 @@
       <% end %>
 
       <div class="actions">
-        <%= f.submit "ログイン", class: "btn btn-lg btn-warning mt-4 w-75 font-weight-bolder" %>
+        <%= f.submit "ログイン", class: "btn btn-lg btn-warning mt-4 w-75 font-weight-bolder h3" %>
       </div>
         <% end %>
       <br>

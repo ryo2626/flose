@@ -9,8 +9,10 @@ class InfoController < ApplicationController
   def create
   	@info = Info.new(info_params)
   	if @info.save
+      flash[:notice] = '投稿しました。'
   		redirect_to root_path
   	else
+      flash[:error] = '投稿できませんでした。'
       render action: :new
   	end
   end

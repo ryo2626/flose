@@ -29,11 +29,12 @@ $(document).ready(function(){
   });
 
 bubbly({
-  bubbleFunc:() => `hsla(${Math.random() * 10000}, 100%, 50%, .2)`,
-  colorStart: '#ffffff',
+  bubbleFunc: () => `hsla(${Math.random() * 360}, 100%, 50%, ${Math.random() * 0.25})`,
+  colorStart: '#CEF9DC',
   colorStop: '#FFAD90',
   blur: 1,
-  compose: 'source-over',
+  bubbles: 80,
+  compose: "xor",
 });
 
 });

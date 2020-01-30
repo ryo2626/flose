@@ -6,13 +6,18 @@
 		<h3>空白検索で全てのレシピ</h3>
 	</div>
 </div>
-
 <div class="row">
 	<div class="col-6 offset-3 text-center">
   	<%= search_form_for @search, url:publics_recipes_path do |f| %>
     	<%= f.search_field :dish_name_cont, :placeholder => "料理名で曖昧検索", class: "form-control-lg" %>
     	<%= f.submit "検索", class: "btn-lg" %>
   	<% end %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-12">
+  	<div class="text-secondary h4 ml-5"><%= @result.count %>件</div>
 	</div>
 </div>
 
@@ -28,7 +33,7 @@
   							<%= attachment_image_tag r, :recipe_image, :fill, 1000, 1000, fallback: "no_image.png", class: "image_height img" %>
 							</div>
 							<div class="hide">
-							<h5>コメント:</h5>
+								<h5>コメント:</h5>
   							<%= r.comment %>
 							</div>
 						</div>
@@ -45,10 +50,10 @@
 
 				<div class="row">
 					<div class="col-10 offset-1 text-center">
-						<h5>by <%= r.public.nickname %></h5>
+						<h5 class="font-italic">by <%= r.public.nickname %></h5>
 						<div class="row">
 							<div class="col-6 text-center">
-								<h5><%= r.created_at.strftime("%Y/%m/%d") %></h5>
+								<h5 class="font-italic"><%= r.created_at.strftime("%Y/%m/%d") %></h5>
 							</div>
 							<div class="col-6 text-right">
 								<%= render 'recipes', recipe: r %>

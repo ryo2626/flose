@@ -16,26 +16,30 @@
 <!-- ここまで -->
 
 <div class="row">
-<table class="table table-bordered col-lg-6 col-12">
+<table class="table table-bordered col-lg-5 offset-lg-1 col-10 offset-1">
 	<thead class="thead thead-light">
-		<th style="width:65%;">材料
-		<th style="width:35%;">使用量
+		<tr>
+			<th style="width:65%;">材料
+			<th style="width:35%;">使用量
 	</thead>
 	<% @first.each do |r| %>
 		<tbody>
-			<td><%= r.ingredient_name %>
-			<td><%= r.ingredient_amount %>
+			<tr class="table-light">
+				<td><%= r.ingredient_name %>
+				<td><%= r.ingredient_amount %>
 		</tbody>
 	<% end %>
 </table>
 
-<table class="table table-bordered col-lg-6 col-12">
+<table class="table table-bordered col-lg-5 offset-lg-0 col-10 offset-1">
 	<thead class="thead thead-light">
+		<tr class="d-none d-lg-table-row">
 		<th style="width:65%;">材料
 		<th style="width:35%;">使用量
 	</thead>
 	<% @last.each do |r| %>
 		<tbody>
+			<tr class="table-light">
 			<td><%= r.ingredient_name %>
 			<td><%= r.ingredient_amount %>
 		</tbody>
@@ -44,17 +48,19 @@
 </div>
 
 <div class="row">
-	<div class="col-12">
-		<table class="table table-bordered">
-			<thead class="thead thead-light">
-				<th>&emsp;工程
-			</thead>
-			<tbody class="tbody ">
-				<% @recipe.cooks.each do |c| %>
-					<tr>
-						<td><%= c.process_count %>.  <%= c.process_text %>
-				<% end %>
-		</tbody>
-</table>
-</div>
+	<div class="col-10 offset-1">
+
+		<% @recipe.cooks.each do |c| %>
+			<table class="table table-bordered">
+				<thead class="thead thead-light">
+					<th class="h3"><%= c.process_count %>.
+				</thead>
+				<tbody class="tbody">
+					<tr class="table-light">
+						<td class="h3"><%= c.process_text %>
+				</tbody>
+			</table>
+		<% end %>
+
+	</div>
 </div>

@@ -1,29 +1,45 @@
-<div class="top-box row">
-
-<div class="text-center col-12">
-<h1>ようこそ<strong>FLose</strong>へ</h1>
-<h2>
-	このサイトは、<br>
-	<strong>
-	「買いに行く」<br>
-	「食べに行く」<br>
-	「余りやすい食材で料理」</strong><br>
-	の３つの方法で、食品ロス削減を目指していくサイトです。
+<div class="row">
+<div class="top-box text-center col-12 col-lg-10 offset-lg-1">
+<h1 class="pt-3">ようこそ<strong>FLose</strong>へ</h1>
+<h2 class="mt-4">このサイトは、
+	<div class="row">
+		<div class="col-12 col-lg-4 text-lg-right mt-4">
+			<span class="top-text1 font-weight-bold text-light">「買いに行く」</span>
+		</div>
+		<div class="col-12 col-lg-3 text-lg-right mt-4">
+			<span class="top-text2 font-weight-bold text-light">「食べに行く」</span><br>
+		</div>
+		<div class="col-12 col-lg-5 text-lg-left mt-4">
+			<span class="top-text3 font-weight-bold text-light">「余りやすい食材で料理」</span><br>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 mt-4">
+			<span class="top-text4">の３つの方法で、
+		</div>
+		<div class="col-12 mt-4">
+			<span class="top-text4">食品ロス削減を目指していくサイトです。
+		</div>
+	</div>
 </h2><br>
 
   <% if signed_in? %>
   <% else %>
-<%= link_to new_public_session_path, class: "btn btn-warning" do %>
+  <div class="row">
+  	<div class="col-12 col-lg-6">
+<%= link_to new_public_session_path, class: "btn btn-warning btn-block btn-lg py-5 py-lg-1" do %>
   <i class="fas fa-user" style="font-size: 25px; color: black;"></i>
-  <span style="font-size: 25px; color: #CC3300;">利用者様 ログイン・新規登録</span>
+  <span class="h2" style="color: #CC3300;">利用者様 ログイン・新規登録</span>
 <% end %>
-
-<%= link_to new_company_session_path, class: "btn btn-info" do %>
-	<i class="fas fa-user-tie" style="font-size: 25px; color: black;"></i>
-	<span style="font-size: 25px; color: 	#0000CD;">企業様 ログイン・新規登録</span>
-<% end %>
-<% end %>
-
 </div>
 
+  	<div class="col-12 col-lg-6">
+<%= link_to new_company_session_path, class: "btn btn-info btn-block btn-lg py-5 py-lg-1 mt-4 mt-lg-0" do %>
+	<i class="fas fa-user-tie" style="font-size: 25px; color: black;"></i>
+	<span class="h2" style="color: #0000CD;">企業様 ログイン・新規登録</span>
+<% end %>
+<% end %>
+</div>
+</div>
+</div>
 </div>

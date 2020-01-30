@@ -15,7 +15,7 @@
 
     <div class="field">
       <%= f.label :lastname %>
-      <%= f.text_field :lastname, :size=>"100", autofocus: true, autocomplete: "姓", class: 'form-control' %>
+      <%= f.text_field :lastname, class: 'form-control-lg' %>
     </div>
     <div class="field">
       <%= f.label :firstname %>
@@ -47,7 +47,7 @@
     </div>
     <div class="field">
       <%= f.label :phone %>（半角で入力）
-      <%= f.text_field :phone, autofocus: true, autocomplete: "電話番号", class: 'form-control' %>
+      <%= f.text_field :phone, placeholder: "必須", required: true, class: 'form-control' %>
     </div>
     <div class="field">
       <%= f.label :password %>（６文字以上）
@@ -72,3 +72,4 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bubbly-bg@1.0.0/dist/bubbly-bg.js" class="public"></script>

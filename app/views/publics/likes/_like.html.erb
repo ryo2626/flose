@@ -1,11 +1,11 @@
 <div id="like-link-<%= recipe.id %>">
   <% if current_public.likes.find_by(recipe_id: recipe.id) %>
-    <%= link_to publics_unlike_path(recipe.id), method: :delete, remote: true do %>
-      <i class="fas fa-heart"></i><%= recipe.likes.count %>
+    <%= link_to publics_unlike_path(recipe.id), method: :delete, remote: true, class: "text-decoration-none" do %>
+      <i class="fas fa-heart text-danger h4"></i><span class="text-secondary h4"><%= recipe.likes.count %></span>
     <% end %>
   <% else %>
-    <%= link_to publics_like_path(recipe.id), method: :post, remote: true do %>
-      <i class="far fa-heart"></i><%= recipe.likes.count %>
+    <%= link_to publics_like_path(recipe.id), method: :post, remote: true,  class: "text-decoration-none" do %>
+      <i class="far fa-heart text-secondary h4"></i><span class="text-secondary h4"><%= recipe.likes.count %></span>
     <% end %>
   <% end %>
 </div>
