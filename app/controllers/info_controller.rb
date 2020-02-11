@@ -1,4 +1,5 @@
 class InfoController < ApplicationController
+
   def top
   end
 
@@ -10,17 +11,17 @@ class InfoController < ApplicationController
   	@info = Info.new(info_params)
   	if @info.save
       flash[:notice] = '投稿しました。'
-  		redirect_to root_path
-  	else
+      redirect_to root_path
+    else
       flash[:error] = '投稿できませんでした。'
       render action: :new
-  	end
+    end
   end
 
   def about
   end
 
-private
+  private
 
   def info_params
     params.require(:info).permit(:user_status, :public_id, :company_id, :contributor, :contributor_email, :info_status, :info_content)
