@@ -6,7 +6,7 @@ Ruby on Railsの勉強として作成した、ポートフォリオサイトで�
 
 ### デモページ
 
-[サイトへのリンク](flose.xyz):FLoseへ
+[サイトへのリンク](http://flose.xyz/):FLoseへ
 
 ### バージョン
 
