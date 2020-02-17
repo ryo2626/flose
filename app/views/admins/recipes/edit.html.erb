@@ -8,29 +8,25 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="col text-center">
-		<h1 class="font-weight-bold">レシピ編集画面
-		<%= link_to "レシピ削除", admins_recipe_path, method: :delete, class: "btn btn-danger" %></h1>
-	</div>
-</div>
+<h1><span class="text-secondary">■</span>レシピ編集画面<%= link_to "レシピ削除", admins_recipe_path, method: :delete, data: {confirm: "本当に削除してよろしいですか？"}, class: "btn btn-danger ml-4" %>
+</h1>
 
 <div class="row">
 	<div class="col-12 col-lg-6 offset-lg-3">
-		<%= form_for @recipe, url: admins_recipe_path, method: :patch do |form| %>
+		<%= form_for @recipe, url: admins_recipe_path, method: :patch, data: {confirm: "編集を完了してよろしいですか？"} do |form| %>
 			<%= form.hidden_field :public_id %>
 
-		<h3 class="mt-4"><span class="text-secondary">■ </span>料理名<span class="h6 text-secondary mt-4">※20文字以内</span></h3>
+		<h3 class="mt-4">料理名<span class="h6 text-secondary">※20文字以内</span></h3>
 		<%= form.text_field :dish_name, :placeholder => "必須", class: "form-control-lg text-center w-100" %>
 
-		<h3 class="mt-4 mb-3"><span class="text-secondary">■ </span>画像選択</h3>
+		<h3 class="mt-4 mb-3">画像選択</h3>
 		<%= form.attachment_field :recipe_image %>
 
-		<h3 class="mt-4"><span class="text-secondary">■ </span>コメント<span class="h6 text-secondary mt-4">※40文字以内</span></h3>
+		<h3 class="mt-4">コメント<span class="h6 text-secondary mt-4">※40文字以内</span></h3>
 		<%= form.text_area :comment, :placeholder => "必須", class: "form-control-lg text-center w-100" %>
 
 
-		<h3 class="mt-4"><span class="text-secondary">■ </span>材料</h3>
+		<h3 class="mt-4">材料</h3>
 		<%= form.fields_for :ingredients do |f| %>
     	<%= render "ingredients_fields", f: f %>
   	<% end %>
@@ -40,7 +36,7 @@
 			<span class="h6 text-secondary">材料を追加</span>
 		</div>
 
-		<h3 class="mt-5"><span class="text-secondary">■ </span>工程</h3>
+		<h3 class="mt-5">工程</h3>
 			<%= form.fields_for :cooks do |f| %>
     		<%= render "cooks_fields", f: f %>
   		<% end %>
@@ -55,7 +51,6 @@
 				<%= form.submit '編集完了', class: "btn btn-lg btn-warning my-4 px-4" %>
 			</div>
 		</div>
-
 
 		<% end %>
 	</div>

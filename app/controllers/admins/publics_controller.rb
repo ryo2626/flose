@@ -26,8 +26,8 @@ class Admins::PublicsController < ApplicationController
   end
 
   def update
-  	@user = Public.with_deleted.find(params[:id])
-  	if @user.update(user_params)
+  	user = Public.with_deleted.find(params[:id])
+  	if user.update(user_params)
       flash[:notice] = '変更が保存されました'
   	  redirect_to edit_admins_public_path(user)
     else
@@ -40,7 +40,7 @@ class Admins::PublicsController < ApplicationController
                   .page(params[:page]).per(10)
       @recipes = @user.recipes
                     .page(params[:page]).per(10)
-      flash.now[:error] = '変更が保存されませんでした'
+      flash.now[:error] = '変更を保存できませんでした'
       render :edit
     end
   end
@@ -50,11 +50,11 @@ class Admins::PublicsController < ApplicationController
     if user.deleted?
       user.restore
       flash[:notice] = 'アカウント凍結が解除されました。'
-      redirect_to admins_publics_path
+      redirect_to edit_admins_public_path(user)
     else
       user.destroy
       flash[:error] = 'アカウントが凍結されました。'
-      redirect_to admins_publics_path
+      redirect_to edit_admins_public_path(user)
     end
   end
 

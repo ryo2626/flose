@@ -19,13 +19,11 @@ class Admins::InfoController < ApplicationController
 		info.info_status = 1
 		if info.save
 			flash[:notice] = '更新されました。'
-			redirect_to admins_info_index_path
+			redirect_to edit_admins_info_path(info)
 		else
 			flash[:error] = '更新できませんでした。'
 			redirect_to edit_admins_info_path(info)
 		end
 	end
-
-private
 
 end

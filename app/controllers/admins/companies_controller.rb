@@ -20,27 +20,27 @@ class Admins::CompaniesController < ApplicationController
   end
 
 	def update
-		@user = Company.with_deleted.find(params[:id])
-    if @user.update(user_params)
+		user = Company.with_deleted.find(params[:id])
+    if user.update(user_params)
     	flash[:notice] = '変更が保存されました。'
-    	redirect_to admins_companies_path(@user)
+    	redirect_to edit_admins_company_path(user)
   	else
   		@nav_info = Info.where(info_status: 0)
-  		flash.now[:error] = '変更できませんでした。'
+  		flash.now[:error] = '変更を保存できませんでした。'
   		render :edit
   	end
 	end
 
 	def destroy
-		@user = Company.with_deleted.find(params[:id])
-		if @user.deleted?
-			@user.restore
+		user = Company.with_deleted.find(params[:id])
+		if user.deleted?
+			user.restore
 			flash[:notice] = 'アカウント凍結が解除されました。'
-			redirect_to admins_companies_path
+			redirect_to edit_admins_company_path(user)
 		else
-    	@user.destroy
+    	user.destroy
     	flash[:error] = 'アカウントが凍結されました。'
-    	redirect_to admins_companies_path
+    	redirect_to edit_admins_company_path(user)
     end
 	end
 

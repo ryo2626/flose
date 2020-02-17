@@ -18,7 +18,7 @@ class Admins::RecipesController < ApplicationController
   end
 
   def update
-    @recipe = Recipe.find(params[:id])
+    recipe = Recipe.find(params[:id])
     cooks = params.dig(:recipe,:cooks_attributes)
   # Recipe.cooks.process_countに連番を振る
     cook_count = 1

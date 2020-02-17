@@ -1,10 +1,33 @@
-<h1>お問い合わせ詳細・編集</h1>
+<div class ="row">
+  <div class ="col-8 offset-2">
+    <div class="card border-secondary w-100">
+      <div class="card-header text-center alert-secondary border-secondary text-black">
+        <h2>お問い合わせ詳細</h2>
+      </div>
+      <div class="card-body">
+      	<h3 class="mt-3 font-weight-bolder"><span class="text-secondary">■</span>投稿者種別</h3>
+      	<h4 class="mt-2"><%= @info.user_status %></h4>
 
-<h3>投稿者種別: <%= @info.user_status %></h3>
-<h3>投稿者種名: <%= @info.contributor %></h3>
-<h3>メールアドレス: <%= @info.contributor_email %></h3>
-<h3>投稿内容: <%= @info.info_content %></h3>
-<h3>回答: <%= @info.info_status %></h3>
-<% if @info.info_status == 1 %>
-	<%= link_to "回答済みにする", admins_info_path, method: :PATCH, class: "btn btn-danger" %>
-<% end %>
+      	<h3 class="mt-4 font-weight-bolder"><span class="text-secondary">■</span>投稿者種名</h3>
+      	<h4 class="mt-2"><%= @info.contributor %></h4>
+
+      	<h3 class="mt-4 font-weight-bolder"><span class="text-secondary">■</span>メールアドレス</h3>
+      	<h4 class="mt-2"><%= @info.contributor_email %></h4>
+
+      	<h3 class="mt-4 font-weight-bolder"><span class="text-secondary">■</span>投稿内容</h3>
+      	<h4 class="mt-2"><%= @info.info_content %></h4>
+
+      	<% if @info.info_status == "未回答" %>
+      	<div class="row">
+      		<div class="col-12 text-center">
+      			<%= link_to "対応済みにする", admins_info_path, method: :PATCH, data: {confirm: "回答状況を変更してよろしいですか？"}, class: "btn btn-outline-secondary alert-secondary btn-lg mt-4 px-4" %>
+      		</div>
+      	</div>
+      	<% elsif @info.info_status == "回答済み" %>
+      		<h3 class="mt-4 font-weight-bolder"><span class="text-secondary">■</span>対応済み</h3>
+      	<% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

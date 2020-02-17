@@ -9,7 +9,7 @@
 </div>
 
 
-<h1><span class="text-secondary">■</span>利用者詳細・編集<%= link_to "アカウント凍結・解除", admins_public_path, method: :delete, class: "btn btn-danger ml-4", data: {confirm: "本当に凍結しますか？"} %></h1>
+<h1><span class="text-secondary">■</span>利用者詳細・編集<%= link_to "アカウント凍結・解除", admins_public_path, method: :delete, class: "btn btn-danger ml-4" %></h1>
 
 <% if @user.deleted? %>
   <div class="alert-danger text-center">
@@ -25,7 +25,7 @@
 <div class="row">
   <div class="col-12 col-lg-6 offset-lg-3">
 
-  <%= form_for @user, url: admins_public_path, method: :patch do |f|%>
+  <%= form_for @user, url: admins_public_path, method: :patch, data: {confirm: "編集を完了してよろしいですか？"} do |f|%>
   <div class="row">
     <div class="col-6">
       <div class="field h3 mt-3">
