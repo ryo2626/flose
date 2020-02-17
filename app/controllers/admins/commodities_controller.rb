@@ -21,8 +21,8 @@ class Admins::CommoditiesController < ApplicationController
 	end
 
 	def update
-		@commodity = Commodity.find(params[:id])
-		if @commodity.update(commodity_params)
+		commodity = Commodity.find(params[:id])
+		if commodity.update(commodity_params)
 			flash[:notice] = '変更が保存されました。'
 			redirect_to edit_admins_commodity_path(commodity)
 		else
