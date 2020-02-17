@@ -1,4 +1,4 @@
-#      :book::eyes: README
+# :book:&nbsp;:eyes:&ensp;README
 
 ## :information_source: 概要
 Ruby on Railsの勉強として作成した、ポートフォリオサイトです。
