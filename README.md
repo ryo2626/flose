@@ -1,4 +1,4 @@
-# README
+#      :book::eyes: README
 
 ## :information_source: 概要
 Ruby on Railsの勉強として作成した、ポートフォリオサイトです。
@@ -30,6 +30,7 @@ $ cd flose
 ### ■ 実装機能
   **利用者側**
 - ログイン・アウト機能
+- 多重ログイン不可
 - 新規登録機能
 - 商品一覧ページ
   - 商品一覧表示機能
