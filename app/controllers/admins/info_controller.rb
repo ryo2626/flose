@@ -3,7 +3,9 @@ class Admins::InfoController < ApplicationController
 
 	def index
 		@nav_info = Info.where(info_status: 0)
-		@infos = Info.order(created_at: :desc)
+										.page(params[:page]).per(20)
+		@infos = Info.where(info_status: 1)
+								 .order(created_at: :desc)
 								 .page(params[:page]).per(20)
 	end
 
@@ -17,7 +19,7 @@ class Admins::InfoController < ApplicationController
 		info.info_status = 1
 		if info.save
 			flash[:notice] = '更新されました。'
-		　redirect_to admins_info_index_path
+			redirect_to admins_info_index_path
 		else
 			flash[:error] = '更新できませんでした。'
 			redirect_to edit_admins_info_path(info)

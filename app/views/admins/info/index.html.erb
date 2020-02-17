@@ -1,4 +1,36 @@
-<h1 class="text-center"><span class="bg-light">お問い合わせ一覧<span></h1>
+<h1 class="text-center"><span class="bg-light text-secondary">お問い合わせ未対応一覧<span></h1>
+<table class="table">
+	<thead class="thead thead-light">
+		<th>投稿者種別
+		<th>投稿者名
+		<th>回答状況
+		<th>投稿日
+		<th>
+	</thead>
+
+<% @nav_info.each do |i| %>
+	 <tbody class="tbody table-light">
+  	<tr>
+			<td><%= i.user_status %>
+			<td><%= i.contributor %>
+				<%if i.info_status == "回答済み" %>
+			<td><a class="alert alert-dark"><%= i.info_status%></a>
+				<% else %>
+			<td><a class="alert alert-danger mt-4"><%= i.info_status%></a>
+				<% end %>
+			<td><%= i.created_at.strftime("%Y-%m-%d %H:%M") %>
+			<td><%= link_to "詳細へ", edit_admins_info_path(i), class: "btn btn-secondary" %>
+		</tbody>
+	<% end %>
+</table>
+
+<div class="row">
+  <div class="col text-center">
+    <%= paginate @nav_info %>
+  </div>
+</div>
+
+<h1 class="text-center"><span class="bg-light text-secondary">お問い合わせ対応済み一覧<span></h1>
 <table class="table">
 	<thead class="thead thead-light">
 		<th>投稿者種別

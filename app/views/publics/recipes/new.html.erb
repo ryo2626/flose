@@ -20,13 +20,13 @@
 			<%= form.hidden_field :public_id, :value => current_public.id %>
 
 		<h3 class="mt-4"><span class="text-warning">■ </span>料理名<span class="h6 text-secondary mt-4">※20文字以内</span></h3>
-		<%= form.text_field :dish_name, :placeholder => "必須", class: "form-control-lg w-100" %>
+		<%= form.text_field :dish_name, :placeholder => "必須",required: true, class: "form-control-lg w-100" %>
 
 		<h3 class="mt-4 mb-3"><span class="text-warning">■ </span>画像選択</h3>
-		<%= form.attachment_field :recipe_image %>
+		<%= form.attachment_field :recipe_image, style: "font-size: 1px;" %>
 
 		<h3 class="mt-4"><span class="text-warning">■ </span>コメント<span class="h6 text-secondary mt-4">※40文字以内</span></h3>
-		<%= form.text_area :comment, :placeholder => "必須", class: "form-control-lg w-100" %>
+		<%= form.text_area :comment, :placeholder => "必須", required: true, class: "form-control-lg w-100" %>
 
 		<h3 class="mt-4"><span class="text-warning">■ </span>材料</h3>
 		<%= form.fields_for :ingredients do |f| %>

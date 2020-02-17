@@ -13,7 +13,13 @@
   </div>
 </div>
 
-<h1>商品一覧</h1>
+<ul>
+  <li><a href="#active" class="text-success h3">販売中商品一覧へ</a></li>
+  <li><a href="#deleted" class="text-success h3">販売終了商品一覧へ</a></li>
+</ul>
+
+<section id="active">
+  <h2><span class="text-secondary">■</span>販売中商品一覧</h2>
 <% @result.each do |c| %>
   <table class="table">
   	<thead class="thead">
@@ -41,12 +47,46 @@
         <% end %>
 			<td>商品: <%= c.commodity_name.truncate(8) %>
 			<td>残り: <%= c.quantity %>人
-
 		</tbody>
 	</table>
 <% end %>
-
 <%= paginate @result %>
+</section>
+
+<section id="deleted">
+  <h2><span class="text-secondary">■</span>販売終了商品一覧</h2>
+<% @result_d.each do |c| %>
+  <table class="table">
+    <thead class="thead">
+      <tr class="table-secondary">
+      <th><%= c.created_at.strftime("%Y-%m-%d %H:%M") %>
+      <th><th><th>
+        <%= link_to "商品詳細・編集", edit_admins_commodity_path(c), class: "btn btn-light" %>
+    </thead>
+    <tbody class="tbody">
+      <tr class="table-light">
+        <% if c.limit > Time.now %>
+      <td>期限: <%= c.limit.strftime("%Y-%m-%d %H:%M") %>
+        <% else %>
+      <td>販売終了: (<%= c.limit.strftime("%Y-%m-%d %H:%M") %>)
+        <% end %>
+      <td>定価: <%= c.regular_price %>円
+      <td>販売価格: <%= c.sale_price %>円
+      <td>販売形態: <%= c.commodity_category %>
+      <tr class="table-light">
+      <td><%= attachment_image_tag c, :commodity_image, :fill, 1000, 1000, size: '100x80', fallback: "no_image.png" %>
+        <% if c.company.nil? %>
+      <td>企業: 凍結中アカウント
+        <% else %>
+      <td>企業: <%= c.company.company_name.truncate(8) %>
+        <% end %>
+      <td>商品: <%= c.commodity_name.truncate(8) %>
+      <td>残り: <%= c.quantity %>人
+    </tbody>
+  </table>
+<% end %>
+<%= paginate @result_d %>
+</section>
 
 <div id="back">
   <a href="#">

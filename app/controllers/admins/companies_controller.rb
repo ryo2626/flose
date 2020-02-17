@@ -7,10 +7,10 @@ class Admins::CompaniesController < ApplicationController
     @search = Company.with_deleted.ransack(company)
     @result = @search.result(distinct: true)
     									.without_deleted
-    									.page(params[:page]).per(10)
+    									.page(params[:page]).per(20)
     @result_d = @search.result(distinct: true)
     									 .only_deleted
-    									 .page(params[:page]).per(10)
+    									 .page(params[:page]).per(20)
 	end
 
 	def edit
@@ -39,7 +39,7 @@ class Admins::CompaniesController < ApplicationController
 			redirect_to admins_companies_path
 		else
     	@user.destroy
-    	flash[:error] = 'アカウントを凍結されました。'
+    	flash[:error] = 'アカウントが凍結されました。'
     	redirect_to admins_companies_path
     end
 	end

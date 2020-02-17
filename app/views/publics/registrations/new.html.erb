@@ -1,75 +1,69 @@
-<div class="container-fluid">
-
-  <div class ="row">
-    <div class =" mx-auto">
-      <div class ="col-12">
+<div class ="row mt-5">
+  <div class ="col-12 col-lg-6 offset-lg-3">
+    <div class="card border-warning w-100">
+      <div class="card-header text-center alert-warning border-warning text-dark">
         <h2>利用者新規登録</h2>
       </div>
 
-  <div class ="row">
-    <div class ="mx-auto">
-      <div class ="col-12">
+      <div class="card-body">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/error_messages", resource: resource %>
+        <div class="row">
+          <div class="col-6">
+            <h3 class="mt-3"><span class="text-warning">■</span>姓</h3>
+            <%= f.text_field :lastname, required: true, class: "form-control-lg w-100 mt-2 text-center" %>
+          </div>
+          <div class="col-6">
+            <h3 class="mt-3"><span class="text-warning">■</span>名</h3>
+            <%= f.text_field :firstname, required: true, class: "form-control-lg w-100 mt-2 text-center" %>
+          </div>
+        </div>
 
-    <div class="field">
-      <%= f.label :lastname %>
-      <%= f.text_field :lastname, class: 'form-control-lg' %>
-    </div>
-    <div class="field">
-      <%= f.label :firstname %>
-      <%= f.text_field :firstname, autofocus: true, autocomplete: "名", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :lastname_kana %>
-      <%= f.text_field :lastname_kana, autofocus: true, autocomplete: "セイ", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :firstname_kana %>
-      <%= f.text_field :firstname_kana, autofocus: true, autocomplete: "メイ", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :nickname %>
-      <%= f.text_field :nickname, autofocus: true, autocomplete: "ニックネーム", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "メールアドレス", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :postalcode %>（ハイフンなし）
-      <%= f.text_field :postalcode, autofocus: true, autocomplete: "郵便番号", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :address %>
-      <%= f.text_field :address, autofocus: true, autocomplete: "住所", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :phone %>（半角で入力）
-      <%= f.text_field :phone, placeholder: "必須", required: true, class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :password %>（６文字以上）
-      <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
-    </div>
-    <div class="actions">
-      <%= f.submit "会員登録" %>
-    </div>
-  <% end %>
+        <div class="row">
+          <div class="col-6">
+            <h3 class="mt-4"><span class="text-warning">■</span>セイ</h3>
+            <%= f.text_field :lastname_kana, required: true, class: "form-control-lg w-100 mt-2 text-center" %>
+          </div>
+          <div class="col-6">
+            <h3 class="mt-4"><span class="text-warning">■</span>メイ</h3>
+            <%= f.text_field :firstname_kana, required: true, class: "form-control-lg w-100 mt-2 text-center" %>
+          </div>
+        </div>
 
-<%= render "devise/links" %>
+
+        <h3 class="mt-4"><span class="text-warning">■</span>ニックネーム<span class="h5 text-secondary mt-4">※8文字以内</span></h3>
+        <%= f.text_field :nickname, required: true, class: "form-control-lg w-100 mt-2 text-center" %>
+
+        <h3 class="mt-4"><span class="text-warning">■</span>メールアドレス</h3>
+        <%= f.email_field :email, required: true, class: "form-control-lg w-100 mt-2 text-center" %>
+
+        <h3 class="mt-4"><span class="text-warning">■</span>郵便番号<span class="h5 text-secondary mt-4">※半角で入力 ※ハイフンなし</span></h3>
+        <%= f.text_field :postalcode, required: true, class: "form-control-lg w-100 mt-2 text-center" %>
+
+        <h3 class="mt-4"><span class="text-warning">■</span>住所<span class="h5 text-secondary mt-4">※半角で入力</span></h3>
+        <%= f.text_field :address, required: true, class: "form-control-lg w-100 mt-2 text-center" %>
+
+        <h3 class="mt-4"><span class="text-warning">■</span>電話番号<span class="h5 text-secondary mt-4">※半角で入力 ※ハイフンなし</span></h3>
+        <%= f.text_field :phone, required: true, class: "form-control-lg w-100 mt-2 text-center" %>
+
+        <h3 class="mt-4"><span class="text-warning">■</span>パスワード<span class="h5 text-secondary mt-4">※6文字以上</span></h3>
+        <%= f.password_field :password, required: true, class: "form-control-lg w-100 mt-2 text-center" %>
+
+        <h3 class="mt-4"><span class="text-warning">■</span>パスワード確認用</h3>
+        <%= f.password_field :password_confirmation, required: true, class: "form-control-lg w-100 my-2 text-center" %>
+
+        <div class="row">
+          <div class="col-10 offset-1 text-center">
+            <%= f.submit "会員登録", class: "btn btn-lg btn-outline-warning text-dark mt-5 w-100 font-weight-bolder alert-warning" %>
+          </div>
+        </div>
+        <% end %>
 
       </div>
     </div>
   </div>
-
-    </div>
-  </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bubbly-bg@1.0.0/dist/bubbly-bg.js" class="public"></script>

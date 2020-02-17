@@ -18,6 +18,10 @@
 	<div class="alert alert-danger text-center">
 		凍結中アカウント編集不可
 	</div>
+<% else @commodity.limit > Time.now %>
+	<div class="alert alert-danger text-center">
+		販売終了商品 編集不可
+	</div>
 <% end %>
 
 <%= form_for @commodity, url: admins_commodity_path, method: :patch do |f| %>
@@ -51,8 +55,8 @@
     <%= f.radio_button :commodity_category, :食べに来て欲しい %>
     <%= f.label :食べに来て欲しい, class: "commodity_category_label" %>
 </div>
-	<% unless @commodity.company.nil? %>
-		<%= f.submit '商品情報更新', class: "btn btn-danger btn-lg mt-3 mb-4" %>
+	<% unless @commodity.company.nil? || @commodity.limit < Time.now %>
+		<%= f.submit '商品情報更新', class: "btn btn-primary btn-lg mt-3 mb-4" %>
 	<% end %>
 <% end %>
 

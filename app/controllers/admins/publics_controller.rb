@@ -7,10 +7,10 @@ class Admins::PublicsController < ApplicationController
     @search = Public.with_deleted.ransack(public)
     @result = @search.result(distinct: true)
                      .without_deleted
-                     .page(params[:page]).per(10)
+                     .page(params[:page]).per(20)
     @result_d = @search.result(distinct: true)
                        .only_deleted
-                       .page(params[:page]).per(10)
+                       .page(params[:page]).per(20)
   end
 
   def edit

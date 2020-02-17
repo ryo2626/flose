@@ -33,4 +33,5 @@ class Publics::SessionsController < Devise::SessionsController
       redirect_to new_companies_commodity_path
     end
   end
+
 end
