@@ -14,14 +14,14 @@
   </div>
 </div>
 
-<h1>レシピ一覧</h1>
+<h2><span class="text-secondary">■</span>レシピ一覧</h2>
 <% @result.each do |r| %>
   <table class="table">
   	<thead class="thead">
   		<tr class="table-secondary">
   		<th><%= r.dish_name %>
   		<th>投稿日時:<%= r.created_at.strftime("%Y-%m-%d %H:%M") %>
-  		<th><%= link_to "商品詳細・編集", edit_admins_recipe_path(r), class: "btn btn-light" %>
+  		<th><%= link_to "レシピ詳細・編集", edit_admins_recipe_path(r), class: "btn btn-light" %>
   	</thead>
   	<tbody class="tbody">
   		<tr class="table-light">
@@ -32,5 +32,10 @@
 	</table>
 <% end %>
 
+  <%= paginate @result %>
 
-    <%= paginate @result %>
+<div id="back">
+  <a href="#">
+    <%= image_tag 'up.png', :size =>'60x60', class: "img" %>
+  </a>
+</div>

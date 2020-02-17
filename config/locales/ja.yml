@@ -58,7 +58,7 @@ ja:
         postalcode: "郵便番号"
         address: "住所"
         phone: "電話番号"
-
+        company: "企業"
       admin:
         current_password: "現在のパスワード"
         email: "メールアドレス"

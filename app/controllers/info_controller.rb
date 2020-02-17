@@ -3,6 +3,11 @@ class InfoController < ApplicationController
   def top
   end
 
+  def about
+    @nav_info = Info.where(info_status: 0)
+                    .page(params[:page]).per(20)
+  end
+
   def new
   	@info = Info.new
   end
@@ -16,9 +21,6 @@ class InfoController < ApplicationController
       flash[:error] = '投稿できませんでした。'
       render action: :new
     end
-  end
-
-  def about
   end
 
   private

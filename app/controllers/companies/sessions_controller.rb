@@ -30,7 +30,8 @@ class Companies::SessionsController < Devise::SessionsController
 
   def public_user
     if public_signed_in?
-      redirect_to publics_shop_path
+      redirect_to publics_user_path(current_public)
     end
   end
+
 end

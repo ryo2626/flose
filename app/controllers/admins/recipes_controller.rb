@@ -6,7 +6,7 @@ class Admins::RecipesController < ApplicationController
     recipe = params[:q]
     @search = Recipe.ransack(recipe)
     @result = @search.result(distinct: true)
-                     .page(params[:page]).per(10)
+                     .page(params[:page]).per(20)
 	end
 
   def edit

@@ -4,12 +4,12 @@ Rails.application.routes.draw do
   root 'info#top'
 
   devise_for :publics, :controllers => {
-    :passwords => 'publics/passwords',
-    :sessions => 'publics/sessions'
+    :sessions => 'publics/sessions',
+    :registrations => 'publics/registrations'
   }
   devise_for :companies, :controllers => {
-    :passwords => 'companies/passwords',
-    :sessions => 'companies/sessions'
+    :sessions => 'companies/sessions',
+    :registrations => 'companies/registrations'
   }
   devise_for :admins
 

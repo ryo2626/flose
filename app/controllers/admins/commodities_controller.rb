@@ -5,12 +5,19 @@ class Admins::CommoditiesController < ApplicationController
 		@nav_info = Info.where(info_status: 0)
 		commodity = params[:q]
 		@search = Commodity.ransack(commodity)
-    @result = @search.result(distinct: true).includes(:company).page(params[:page]).per(10)
+    @result = @search.result(distinct: true)
+    								 .where(Commodity.arel_table[:limit].gt(Time.now))
+    								 .includes(:company)
+    								 .page(params[:page]).per(20)
+    @result_d = @search.result(distinct: true)
+    									 .where(Commodity.arel_table[:limit].lt(Time.now))
+                       .includes(:company)
+                       .page(params[:page]).per(20)
 	end
 
 	def edit
 		@nav_info = Info.where(info_status: 0)
-		@commodity = Commodity.find(params[:id])
+		@commodity = Commodity.includes(:company).find(params[:id])
 	end
 
 	def update

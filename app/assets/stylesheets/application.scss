@@ -178,7 +178,7 @@ footer{
   bottom: 0;
 }
 
-.registrations,.sessions {
+.registrations,.sessions,.passwords {
   .container {
     padding: 60px 10px;
     min-height: 100vh;
@@ -233,10 +233,9 @@ footer{
   background-attachment: fixed;
   background-size: cover;
   .container {
-    padding: 70px 10px;
-    min-width: 95%;
+    padding: 60px 10px;
+    min-width: 90%;
 }}
-
 
 .publics,.commodities,.companies {
   background-image: image-url('info_bg.PNG');
@@ -246,7 +245,7 @@ footer{
   background-size: cover;
   .container {
     background-color: #FFFFEF;
-    padding: 70px 10px;
+    padding: 60px 10px;
     min-height: 100vh;
     min-width: 90%;
 }}

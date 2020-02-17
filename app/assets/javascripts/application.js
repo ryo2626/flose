@@ -28,13 +28,13 @@ $(document).ready(function(){
       return false;
   });
 
-bubbly({
-  bubbleFunc: () => `hsla(${Math.random() * 360}, 100%, 50%, ${Math.random() * 0.25})`,
-  colorStart: '#CEF9DC',
-  colorStop: '#FFAD90',
-  blur: 1,
-  bubbles: 80,
-  compose: "xor",
-});
+  bubbly({
+    bubbleFunc: () => `hsla(${Math.random() * 360}, 100%, 50%, ${Math.random() * 0.25})`,
+    colorStart: '#CEF9DC',
+    colorStop: '#FFAD90',
+    blur: 1,
+    bubbles: 80,
+    compose: "xor",
+  });
 
 });
