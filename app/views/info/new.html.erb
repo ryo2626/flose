@@ -1,13 +1,13 @@
 <div class="top-box row">
-	<div class="text-center col-12 col-lg-6 offset-lg-3">
+	<div class="col-12 col-lg-6 offset-lg-3">
 
  		<div class="row">
-  		<div class="col-12 col-lg-6 offset-lg-3">
-				<h1>お問い合わせ</h1>
+  		<div class="col-12 col-lg-8 offset-lg-2">
+				<h1 class="text-center">お問い合わせ</h1>
 
 				<% if @info.errors.any? %>
 					<% @info.errors.full_messages.each do |message| %>
-						<h3><%= message %></h3>
+						<h4 class="text-danger">・<%= message %></h4>
 					<% end %>
 				<% end %>
 
@@ -34,30 +34,30 @@
 					<!-- 利用者or企業の場合 -->
 					<% if public_signed_in? || company_signed_in? %>
 						<%= f.hidden_field :contributor, :value => @user_name %>
-						<h3 class="text-warning mt-3">投稿者</h3>
-						<h3><%= @user_name %>様</h3>
-						<h3 class="text-warning mt-3">メールアドレス</h3>
-						<h5>※このアドレスに回答を送信します</h5>
-						<%= f.text_field :contributor_email, value: @user.email %>
+						<h3 class="text-warning mt-4"><span class="alert-warning", style="background: none;">■</span>投稿者</h3>
+						<h3 class="mt-2"><%= @user_name %>様</h3>
+						<h3 class="text-warning mt-4"><span class="alert-warning", style="background: none;">■</span>メールアドレス<span class="h5 text-secondary">※このアドレスに回答を送信します</span></h3>
+						<%= f.text_field :contributor_email, required: true, value: @user.email, class: "mt-2 w-100" %>
 
 					<!-- 未ログインの場合 -->
 					<% else %>
-						<h3 class="text-warning mt-3">投稿者</h3>
-						<%= f.text_field :contributor, class: "form-control-lg mt-2 text-center" %>様
-						<h3 class="text-warning mt-3">メールアドレス</h3>
+
+						<h3 class="text-warning mt-3"><span class="alert-warning", style="background: none;">■</span>投稿者</h3>
+						<%= f.text_field :contributor, required: true, class: "form-control-lg mt-2 text-center w-100" %>
+						<h3 class="text-warning mt-3"><span class="alert-warning", style="background: none;">■</span>メールアドレス</h3>
 						<h5>※このアドレスに回答を送信します</h5>
-		  			<%= f.text_field :contributor_email, class: "form-control-lg mt-2 text-center" %>
+		  			<%= f.text_field :contributor_email, required: true, class: "form-control-lg mt-2 text-center w-100" %>
 
 					<% end %>
 
 					<!-- 共通フォーム -->
 					<%= f.hidden_field :user_status, :value => @status %>
 					<%= f.hidden_field :info_status, :value => "未回答" %>
-					<h3 class="text-warning mt-3">お問い合わせ内容</h3>
-					<%= f.text_area :info_content, calss: "mt-2" %>
-					<br>
-					<%= f.submit '送信する', class:"btn btn-warning" %>
-
+					<h3 class="text-warning mt-4"><span class="alert-warning", style="background: none;">■</span>お問い合わせ内容</h3>
+					<%= f.text_area :info_content, required: true, calss: "mt-2", style: "width: 100%;" %>
+					<div class="text-center">
+						<%= f.submit '送信する', class:"btn btn-warning btn-lg my-4" %>
+					</div>
 				<% end %>
 			</div>
 		</div>
