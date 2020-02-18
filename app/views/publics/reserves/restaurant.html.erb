@@ -71,7 +71,7 @@
 						<%= form_for @reserve, url: publics_reserves_path do |f| %>
 							<%= f.hidden_field :commodity_id, :value => r.id %>
 							<%= f.hidden_field :public_id, :value => current_public.id %>
-							<%= f.submit "予約する", data: {confirm: "予約を確定してよろしいですか？"}, class: "btn btn-success mt-3 pl-4 pr-4" %>
+							<%= f.submit "予約する", data: {confirm: "キャンセルすることはできません。\n予約を確定してよろしいですか？"}, class: "btn btn-success mt-3 pl-4 pr-4" %>
       			<% end %>
       		<% end %>
 					</div>
