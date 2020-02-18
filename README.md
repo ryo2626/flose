@@ -1,4 +1,4 @@
-# :arrow_down:&nbsp;&ensp;README&ensp;:page_with_curl::eyes:
+# :arrow_down:&ensp;README&ensp;:page_with_curl::eyes:
 
 ## :information_source: 概要
 Ruby on Railsの勉強として作成した、ポートフォリオサイトです。
