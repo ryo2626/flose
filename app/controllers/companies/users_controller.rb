@@ -8,11 +8,12 @@ class Companies::UsersController < ApplicationController
   end
 
   def update
-    @user = Company.find(params[:id])
-    if @user.update(user_params)
+    user = Company.find(params[:id])
+    if user.update(user_params)
       flash[:notice] = '変更が保存されました。'
-      redirect_to companies_user_path(@user)
+      redirect_to companies_user_path(user)
     else
+      @user = Company.find(params[:id])
       @commodity = Commodity.where(company_id: @user.id)
       flash.now[:error] = '変更を保存できませんでした。'
       render :show
@@ -28,7 +29,7 @@ class Companies::UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:company).permit(:email, :company_name, :phone, :postalcode, :address)
+    params.require(:company).permit(:company_id, :email, :company_name, :phone, :postalcode, :address)
   end
 
   def correct_user
