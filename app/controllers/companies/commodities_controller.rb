@@ -6,8 +6,8 @@ class Companies::CommoditiesController < ApplicationController
   end
 
   def create
-  	@commodity = Commodity.new(commodity_params)
-  	if @commodity.save
+  	commodity = Commodity.new(commodity_params)
+  	if commodity.save
       flash[:notice] = '商品が作成されました。'
   	  redirect_to companies_user_path(current_company)
     else

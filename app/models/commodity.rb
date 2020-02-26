@@ -13,18 +13,18 @@ class Commodity < ApplicationRecord
 	validates :sale_price, presence: true
 	validates :quantity, presence: true
 	validates :limit, presence: true
-	validate :limit_cannot_be_in_the_past
 	validate :price_check
-
-	def limit_cannot_be_in_the_past
-  	if limit.present? && limit.past?
-    	errors.add(:limit, "(未来の日時を入力してください)")
-  	end
-	end
+	validate :limit_cannot_be_in_the_past
 
 	def price_check
   	if regular_price < sale_price
     	errors.add(:sale_price, "(定価より安くして下さい)")
+  	end
+	end
+
+	def limit_cannot_be_in_the_past
+  	if limit.present? && limit.past?
+    	errors.add(:limit, "(未来の日時を入力してください)")
   	end
 	end
 
