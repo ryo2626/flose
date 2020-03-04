@@ -100,36 +100,34 @@
 <% end %>
 
 <h1 class="mt-3">販売終了</h1>
-  <% @commodity.each do |c| %>
-    <% if c.limit < Time.now %>
+<% @commodity.each do |c| %>
+  <% if c.limit < Time.now %>
   <div class="row">
     <div class="col-1 text-right">
       <%= attachment_image_tag c, :commodity_image, :fill, 1000, 1000, size: '100x100', fallback: "no_image.png", class: "mt-0" %>
     </div>
     <div class="col-11">
-<table class="table">
-  <thead class="thead thead-light">
-    <th>商品名
-    <th>販売価格
-    <th>期限
-    <th>残り時間
-    <th>販売形態
-    <th>詳細
-  </thead>
-    <tbody class="tbody table-light">
-
-        <tr>
-          <td><%= c.commodity_name %>
-          <td><%= c.sale_price %>円
-          <td><%= c.limit.strftime("%m月%d日 %H:%M まで") %>
-          <td>販売終了
-          <td><%= c.commodity_category %>
-          <td><%= link_to "詳細", companies_commodity_path(c), class: "btn btn-success" %>
-
-    </tbody>
-</table>
-</div>
-<% end %>
+      <table class="table">
+        <thead class="thead thead-light">
+          <th>商品名
+          <th>販売価格
+          <th>期限
+          <th>残り時間
+          <th>販売形態
+          <th>詳細
+        </thead>
+        <tbody class="tbody table-light">
+          <tr>
+            <td><%= c.commodity_name %>
+            <td><%= c.sale_price %>円
+            <td><%= c.limit.strftime("%m月%d日 %H:%M まで") %>
+            <td>販売終了
+            <td><%= c.commodity_category %>
+            <td><%= link_to "詳細", companies_commodity_path(c), class: "btn btn-success" %>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <% end %>
-
+<% end %>
 
